@@ -1,2 +1,72 @@
-<h1>Posts#index</h1>
-<p>Find me in app/views/posts/index.html.erb</p>
+<% if false %>
+<article class="container">
+	<div class="row">
+		<section class="">
+			<h2>全記事一覧</h2>
+		</section>
+		<section class="">
+			<%= form_tag(posts_path, :method => 'get' ) do %><%# 指定しないとpost %>
+				<%= text_field_tag :search %>
+				<%= submit_tag "検索", :name => nil %><%#urlを消してる%>
+			<% end %>
+		</section>
+	</div>
+
+	<section class="row">
+		<div class="">
+		<% @posts.each do |post| %>
+			<%if @posts.count > 0 %>
+				<table class="">
+					<thead>
+						<tr class="info">
+							<th>ID</th>
+							<th>ユーザーID</th>
+							<th>ユーザー名</th>
+							<th>タイトル</th>
+							<th>本文</th>
+							<th></th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="active">
+							<td><%= post.id %></td>
+							<td><%= post.user.id %></td>
+							<td><%= post.user.name %></td>
+							<td><%= post.title %></td>
+							<td><%= post.body.truncate(50) %></td>
+							<td><%= link_to "詳細", post_path(post.id) %></td>
+							<td><%= link_to "削除", post_path(post.id), method: :delete, "data-confirm" => "削除しますか？", class: 'btn-sm' %></td>
+						</tr>
+					</tbody>
+				</table>
+			<% else %>
+				<table class="">
+					<tr class="info">
+						<th>ID</th>
+						<th>ユーザーID</th>
+						<th>ユーザー名</th>
+						<th>タイトル</th>
+						<th>本文</th>
+						<th></th>
+						<th></th>
+					</tr>
+
+					<tr class="active">
+						<td><%= post.id %></td>
+						<td><%= post.user.id %></td>
+						<td><%= post.user.name %></td>
+						<td><%= post.title %></td>
+						<td><%= post.body.truncate(50) %></td>
+						<td><%= link_to "詳細", post_path(post.id) %></td>
+						<td><%= link_to "削除", post_path(post.id), method: :delete, "data-confirm" => "削除しますか？", class: 'btn-sm' %></td>
+					</tr>
+				</table>
+			<% end %>
+		<% end %>
+		<%= paginate @posts %>
+		</div>
+	</section>
+</article>
+
+<% end %>

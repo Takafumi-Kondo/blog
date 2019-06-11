@@ -1,2 +1,73 @@
-<h1>Users#index</h1>
-<p>Find me in app/views/users/index.html.erb</p>
+<article class="container">
+	<div class="row">
+		<section class="">
+			<%= link_to users_path do %>
+				<h2>ユーザー一覧</h2>
+			<% end %>
+		</section>
+<!-- 検索フォーム -->
+		<section class="">
+			<%= form_tag(users_path, :method => 'get' ) do %><%# 指定しないとpost,tagはDB変更しないとき%>
+				<%= text_field_tag :search %>
+				<%= submit_tag "検索", :name => nil %><%#urlを消してる%>
+			<% end %>
+		</section>
+	</div>
+
+	<section class="row">
+		<div class="">
+			<%if @users.count > 0 %>
+				<table class="table">
+					<thead>
+						<tr class="info">
+							<th>ID</th>
+							<th>ユーザー名</th>
+							<th>紹介文</th>
+							<th>メール</th>
+							<th></th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+					<% @users.each do |user| %>
+						<tr class="active">
+							<td><%= user.id %></td>
+							<td><%= user.name %></td>
+							<td><%= user.introduction %></td>
+							<td><%= user.email %></td>
+							<td><%= link_to "詳細", user_path(user.id) %></td>
+							<td><%= link_to "削除", user_path(user.id), method: :delete, "data-confirm" => "削除しますか？", class: 'btn-sm' %></td>
+						</tr>
+					<% end %>
+					</tbody>
+				</table>
+			<% else %>
+				<table class="table">
+					<thead>
+						<tr class="info">
+							<th>ID</th>
+							<th>ユーザー名</th>
+							<th>紹介文</th>
+							<th>メール</th>
+							<th></th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+					<% @users.each do |user| %>
+						<tr class="active">
+							<td><%= user.id %></td>
+							<td><%= user.name %></td>
+							<td><%= user.introduction %></td>
+							<td><%= user.email %></td>
+							<td><%= link_to "詳細", user_path(user.id) %></td>
+							<td><%= link_to "削除", user_path(user.id), method: :delete, "data-confirm" => "削除しますか？", class: 'btn-sm' %></td>
+						</tr>
+					<% end %>
+					</tbody>
+				</table>
+			<% end %>
+		<%= paginate @users %>
+		</div>
+	</section>
+</article>

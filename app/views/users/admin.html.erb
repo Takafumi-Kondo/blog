@@ -1,0 +1,65 @@
+<article class="container">
+	<div class="row">
+		<section class="">
+			<h2>ユーザー一覧</h2>
+		</section>
+		<section class="">
+			<%= form_tag(users_path, :method => 'get' ) do %><%# 指定しないとpost %>
+				<%= text_field_tag :search %>
+				<%= submit_tag "検索", :name => nil %><%#urlを消してる%>
+			<% end %>
+		</section>
+	</div>
+
+	<section class="row">
+		<div class="">
+		<% @users.each do |user| %>
+			<%if @users.count > 0 %>
+				<table class="">
+					<thead>
+						<tr class="info">
+							<th>ID</th>
+							<th>ユーザーネーム</th>
+							<th>紹介文</th>
+							<th>メール</th>
+							<th></th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="active">
+							<td><%= user.id %></td>
+							<td><%= user.name %></td>
+							<td><%= user.introduction %></td>
+							<td><%= user.email %></td>
+							<td><%= link_to "詳細", user_path(user.id) %></td>
+							<td><%= link_to "削除", user_path(user.id), method: :delete, "data-confirm" => "削除しますか？", class: 'btn-sm' %></td>
+						</tr>
+					</tbody>
+				</table>
+			<% else %>
+				<table class="">
+					<tr class="info">
+						<th>ID</th>
+						<th>ユーザーネーム</th>
+						<th>紹介文</th>
+						<th>メール</th>
+						<th></th>
+						<th></th>
+					</tr>
+
+					<tr class="active">
+						<td><%= user.id %></td>
+						<td><%= user.name %></td>
+						<td><%= user.introduction %></td>
+						<td><%= user.email %></td>
+						<td><%= link_to "詳細", user_path(user.id) %></td>
+						<td><%= link_to "削除", user_path(user.id), method: :delete, "data-confirm" => "削除しますか？", class: 'btn-sm' %></td>
+					</tr>
+				</table>
+			<% end %>
+		<% end %>
+		<%= paginate @users %>
+		</div>
+	</section>
+</article>>

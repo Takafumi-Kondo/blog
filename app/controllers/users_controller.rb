@@ -3,6 +3,12 @@ class UsersController < ApplicationController
   end
 
   def index
+
+    @users = if params[:search]
+      User.page(params[:page]).per(10).where('name LIKE ?', "%#{params[:search]}%")
+    else
+      User.page(params[:page]).per(10).reverse_order
+    end
   end
 
   def edit
@@ -12,5 +18,21 @@ class UsersController < ApplicationController
   end
 
   def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+=begin
+    if current_user.admin?
+        redirect_to users_path
+    else
+        redirect_to root_path
+    end
+=end
+  end
+
+
+  private
+
+  def user_params
+    params.require(:user).permit(:name, :email, :profile_headerimage, :profile_image, :introduction)
   end
 end
