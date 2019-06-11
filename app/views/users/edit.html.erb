@@ -1,2 +1,36 @@
-<h1>Users#edit</h1>
-<p>Find me in app/views/users/edit.html.erb</p>
+<article class="container">
+	<div class="row">
+		<section class="">
+			<h2>記事管理</h2>
+		</section>
+		<section class="">
+			<%= form_tag(posts_path, :method => 'get' ) do %>
+				<%= text_field_tag :search %>
+				<%= submit_tag "検索", :name => nil %>
+			<% end %>
+		</section>
+	</div>
+<!-- 自身の記事一覧 -->
+	<div class="row">
+		<section class="">
+			<%if @posts.count > 0 %>
+				<%= render 'users/posts', posts: @posts %>
+			<% else %>
+				<%= render 'users/posts', posts: @posts %>
+			<% end %>
+			<%= paginate @posts %>
+		</section>
+<!-- 右バー ユーザー編集 -->
+		<section class="">
+			<%= form_for(@user) do |f| %>
+				<%= attachment_image_tag @user, :profile_image, format: 'jpeg', fallback: 'no_image.jpg', size: '140x120', class: 'img-circle pull-left profile-img' %>
+				<%= f.attachment_field :profile_image %>
+				<%= f.text_field :name, autofocus: true, placeholder: "ユーザー名", class: '' %>
+				<%= f.text_area :introduction, placeholder: "紹介文", class: '' %>
+				<%= f.submit "更新する", class: '' %>
+			<% end %>
+			<%= link_to "パスワード再設定はこちら", edit_password_url(@resource, reset_password_token: @token) %>
+			<%= link_to "メールアドレス変更はこちら", confirmation_url(@resource, confirmation_token: @token) %>
+		</section>
+	</div>
+</article>
