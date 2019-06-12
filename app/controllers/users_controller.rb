@@ -3,7 +3,12 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.page(params[:page]).per(10).reverse_order
+
+    @users = if params[:search]
+      User.page(params[:page]).per(10).where('name LIKE ?', "%#{params[:search]}%")
+    else
+      User.page(params[:page]).per(10).reverse_order
+    end
   end
 
   def edit

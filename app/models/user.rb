@@ -20,7 +20,7 @@ class User < ApplicationRecord
 	attachment :profile_image
 	attachment :profile_headerimage
 
-
+# フォロー関連
 	def follow!(other_user)
 		following_relationships.create!(following_id: other_user.id)
 	end
@@ -28,8 +28,16 @@ class User < ApplicationRecord
 	def unfollow!(other_user)
 		following_relationships.find_by(following_id: other_user.id).destroy
 	end
-# フォローしているかどうか
+	# フォローしているかどうか
 	def following?(other_user)
 		following_relationships.find_by(following_id: other_user.id)
+	end
+# 検索関連
+	def self.search(search)#selfはUser
+		if search
+			where(['name LIKE ?', "%#{search}%"])#検索内とnameの部分一致を表示
+		else# SQL記述 %は0字以上の任意文字列
+			all
+		end
 	end
 end
