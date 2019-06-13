@@ -1,2 +1,7 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<%= @user.name %>
+<%= @user.introduction %>
+<!-- フォロー関係 -->
+<%= link_to "フォロー #{@user.following.count}", following_user_path(@user) %>
+<%= link_to "フォロワー #{@user.followers.count}", followers_user_path(@user) %>
+<%= render 'users/form', user: @user %>
+<!-- ここまで -->

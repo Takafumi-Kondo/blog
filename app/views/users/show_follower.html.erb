@@ -1,0 +1,18 @@
+<table class="table">
+	<tr>
+		<th></th>
+		<th></th>
+		<th></th>
+	</tr>
+	<tr>
+		<% @users.each do |user| %>
+		<td></td>
+		<td>
+			<%= link_to user_path(user.id), class: '' do %>
+				<%= user.name %>
+			<% end %>
+		</td>
+		<td><%= user.introduction %></td>
+		<% end %>
+	</tr>
+</table>

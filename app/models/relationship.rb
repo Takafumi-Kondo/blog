@@ -1,5 +1,7 @@
 class Relationship < ApplicationRecord
+	# フォローする側
 	belongs_to :follower, class_name: "User"
+	#される側
 	belongs_to :following, class_name: "User"
 
 	validates :follower_id, presence: true

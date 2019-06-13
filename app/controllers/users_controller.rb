@@ -1,9 +1,9 @@
 class UsersController < ApplicationController
   def show
+    @user = User.find(params[:id])
   end
 
   def index
-
     @users = if params[:search]
       User.page(params[:page]).per(10).where('name LIKE ?', "%#{params[:search]}%")
     else
@@ -12,9 +12,22 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @user = User.find(params[:id])
+    @posts = if params[:search]
+      @user.posts.page(params[:page]).per(10).where('body LIKE ?', "%#{params[:search]}%")
+    else
+      @user.posts.page(params[:page]).per(10).reverse_order
+    end
+    #binding.pry
   end
 
   def update
+    @user = User.find(params[:id])
+    if @user.update(user_params)
+      redirect_to user_path
+    else
+      render :edit
+    end
   end
 
   def destroy
@@ -29,6 +42,18 @@ class UsersController < ApplicationController
 =end
   end
 
+  def following
+    @user = User.find(params[:id])
+    @users = @user.following
+    render 'show_follow'
+  end
+
+  def followers
+    @user = User.find(params[:id])
+    @users = @user.followers
+    render 'show_follower'
+  end
+
 
   private
 
@@ -36,3 +61,4 @@ class UsersController < ApplicationController
     params.require(:user).permit(:name, :email, :profile_headerimage, :profile_image, :introduction)
   end
 end
+#binding.pry

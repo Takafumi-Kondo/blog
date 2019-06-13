@@ -9,29 +9,31 @@ class User < ApplicationRecord
 	has_many :contacts, dependent: :destroy
 	has_many :favorites, dependent: :destroy
 	has_many :comments, dependent: :destroy
-# フォローできるユーザーを取り出せる(user.relationships.followings)
-	has_many :following_relationships, foreign_key: "follower_id", class_name: "Relationship", dependent: :destroy
+# フォローする側(active_relationships)擬似的に作成。foreign_keyでされる側id指定している
+	has_many :active_relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
 #フォローしているユーザーを取り出す
-	has_many :followings, through: :following_relationships
+	has_many :following, through: :active_relationships
 # フォローされてるユーザーを取り出せる(user.followers)
-	has_many :follower_relationships, foreign_key: "following_id", class_name: "Relationship", dependent: :destroy
-	has_many :followers, through: :follower_relationships
+	has_many :passive_relationships, class_name: "Relationship", foreign_key: "following_id", dependent: :destroy
+	has_many :followers, through: :passive_relationships
 
 	attachment :profile_image
 	attachment :profile_headerimage
 
+
 # フォロー関連
-	def follow!(other_user)
-		following_relationships.create!(following_id: other_user.id)
+	def follow(other_user)
+		active_relationships.create(following_id: other_user.id)
 	end
 
-	def unfollow!(other_user)
-		following_relationships.find_by(following_id: other_user.id).destroy
+	def unfollow(other_user)
+		active_relationships.find_by(following_id: other_user.id).destroy
 	end
-	# フォローしているかどうか
+	# フォローしているかどうか(t or f)
 	def following?(other_user)
-		following_relationships.find_by(following_id: other_user.id)
+		following.include?(other_user)
 	end
+
 # 検索関連
 	def self.search(search)#selfはUser
 		if search

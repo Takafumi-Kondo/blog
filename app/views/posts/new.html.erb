@@ -1,2 +1,15 @@
-<h1>Posts#new</h1>
-<p>Find me in app/views/posts/new.html.erb</p>
+<% if false %>
+仮投稿
+<h2>posts#new</h2>
+<%= form_for @post do |f| %>
+	<%= f.label :title, "タイトル" %>
+		<%= f.text_field :title, class: "book_title" %>
+	<%= f.label :body, "本文" %>
+		<%= f.text_area :body, class: "book_body" %><br>
+	<%= f.label :genre_id, "ジャンル" %>
+		<%= f.collection_select :genre_id, Genre.all, :id, :genre_name, class: 'form-control input-sm' %>
+	<%= f.label :emotion_id, "気分" %>
+		<%= f.collection_select :emotion_id, Emotion.all, :id, :emotion_name, class: 'form-control input-sm' %>
+<%= f.submit "投稿" %>
+<% end %>
+<% end %>
