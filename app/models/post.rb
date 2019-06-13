@@ -11,4 +11,12 @@ class Post < ApplicationRecord
 	def favorited_by?(user)
 		favorites.where(user_id: user.id).exists?
 	end
+
+	def self.search(search)#selfはPosr
+		if search
+			where(['body LIKE ?', "%#{search}%"])#検索内とnameの部分一致を表示
+		else# SQL記述 %は0字以上の任意文字列
+			all
+		end
+	end
 end
