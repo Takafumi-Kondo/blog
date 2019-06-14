@@ -22,6 +22,7 @@ class PostsController < ApplicationController
   end
 
   def admin
+    @posts = Post.page(params[:page]).per(20).reverse_order
   end
 
   def edit
@@ -31,6 +32,11 @@ class PostsController < ApplicationController
   end
 
   def destroy
+  end
+
+  def timeline
+    @user = current_user
+    @users = @user.following.page(params[:page]).per(3).order("created_at DESC")
   end
 
 

@@ -2,6 +2,8 @@ Rails.application.routes.draw do
 
   root to: 'posts#index'
   get '/about' => 'static_pages#about'
+  get 'posts/admin' => 'posts#admin'
+  get 'timeline' => 'posts#timeline'
 
   devise_for :users
   resources :genres,         only: [:create, :index, :update, :destroy]

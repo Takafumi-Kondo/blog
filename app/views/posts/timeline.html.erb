@@ -1,0 +1,25 @@
+<!-- フォローしているユーザーの投稿 -->
+<div class="container">
+	<div class="row">
+		<table class="table">
+		<% @users.each do |user| %>
+			<% @posts = Post.where(user_id: user.id).limit(1).order("created_at DESC") %>
+			<% @posts.each do |post| %>
+				<tr>
+					<td>
+						<%= attachment_image_tag post.user, :profile_image, format: 'jpeg', fallback: 'no_image.jpg', size: '45x45', class: 'img-circle pull-left profile-img' %>
+					</td>
+					<td>
+						<%= link_to user_path(post.user.id), class: '' do %>
+							<%= post.user.name %>
+						<% end %>
+					</td>
+					<td><%= post.title %></td>
+					<td><%= post.body.truncate(50) %></td>
+				</tr>
+			<% end %>
+		<% end %>
+		<%= paginate @users %>
+		</table>
+	</div>
+</div>

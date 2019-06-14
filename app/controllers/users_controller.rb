@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 
   def index
     @users = if params[:search]
-      User.page(params[:page]).per(10).where('name LIKE ?', "%#{params[:search]}%")
+      User.page(params[:page]).per(10).where('name LIKE ?', "%#{params[:search]}%").reverse_order
     else
       User.page(params[:page]).per(10).reverse_order
     end
@@ -31,6 +31,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
+
     @user = User.find(params[:id])
     @user.destroy
 =begin
@@ -44,13 +45,13 @@ class UsersController < ApplicationController
 
   def following
     @user = User.find(params[:id])
-    @users = @user.following
+    @users = @user.following.page(params[:page]).per(20).reverse_order
     render 'show_follow'
   end
 
   def followers
     @user = User.find(params[:id])
-    @users = @user.followers
+    @users = @user.followers.page(params[:page]).per(20).reverse_order
     render 'show_follower'
   end
 

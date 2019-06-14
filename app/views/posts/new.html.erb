@@ -1,5 +1,4 @@
-<% if false %>
-仮投稿
+<!-- 仮投稿 -->
 <h2>posts#new</h2>
 <%= form_for @post do |f| %>
 	<%= f.label :title, "タイトル" %>
@@ -11,5 +10,4 @@
 	<%= f.label :emotion_id, "気分" %>
 		<%= f.collection_select :emotion_id, Emotion.all, :id, :emotion_name, class: 'form-control input-sm' %>
 <%= f.submit "投稿" %>
-<% end %>
 <% end %>
