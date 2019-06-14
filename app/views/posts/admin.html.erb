@@ -1,1 +1,51 @@
-<h1>posts#admin</h1>
+<section class="container">
+	<div class="row">
+		<div class="">
+			<%= link_to posts_admin_path do %>
+				<h2>記事一覧</h2>
+			<% end %>
+		</div>
+<!-- 検索フォーム -->
+		<div class="">
+			<%= form_tag(posts_path, :method => 'get' ) do %><%# 指定しないとpost,tagはDB変更しないとき%>
+				<%= text_field_tag :search %>
+				<%= submit_tag "検索", :name => nil %><%#urlを消してる%>
+			<% end %>
+		</div>
+	</div>
+
+	<%# if @posts.count == 0 %>
+	<%# else %>
+		<div class="row">
+			<div class="">
+				<table class="table">
+					<thead>
+						<tr class="info">
+							<th width="3%">ID</th>
+							<th width="5%">ユーザーID</th>
+							<th width="10%">ユーザー名</th>
+							<th>タイトル</th>
+							<th>本文</th>
+							<th></th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+					<% @posts.each do |post| %>
+						<tr class="active">
+							<td><%= post.id %></td>
+							<td><%= post.user.id %></td>
+							<td><%= post.user.name %></td>
+							<td><%= post.title %></td>
+							<td><%= post.body.truncate(50) %></td>
+							<td><%= link_to "詳細", post_path(post.id) %></td>
+							<td><%= link_to "削除", post_path(post.id), method: :delete, "data-confirm" => "削除しますか？", class: 'btn-sm' %></td>
+						</tr>
+					<% end %>
+					</tbody>
+				</table>
+				<%= paginate @posts %>
+			</div>
+		</div>
+	<%# end %>
+</section>

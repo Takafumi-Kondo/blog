@@ -22,6 +22,7 @@ class PostsController < ApplicationController
   end
 
   def admin
+    @posts = Post.page(params[:page]).per(20).reverse_order
   end
 
   def edit

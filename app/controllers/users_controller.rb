@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 
   def index
     @users = if params[:search]
-      User.page(params[:page]).per(10).where('name LIKE ?', "%#{params[:search]}%")
+      User.page(params[:page]).per(10).where('name LIKE ?', "%#{params[:search]}%").reverse_order
     else
       User.page(params[:page]).per(10).reverse_order
     end
@@ -31,6 +31,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
+
     @user = User.find(params[:id])
     @user.destroy
 =begin
