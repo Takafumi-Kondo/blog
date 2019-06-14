@@ -1,3 +1,48 @@
-<h1>Posts#show</h1>
-<p><%= @post.title %></p>
-<p><%= @post.body %></p>
+<section class="">
+	<h1>Posts#show</h1>
+	<p><%= @post.title %></p>
+	<p><%= @post.body %></p>
+<!-- いいね欄 favorited_by?はmodelに定義したやつ-->
+	<% if @post.favorited_by?(current_user) %>
+		<%= link_to post_favorites_path(@post), :style=> 'text-decoration: none;', method: :delete do %>
+			<i class="fa fa-heart" style="color: red;"></i>
+		<% end %>
+		<%= @post.favorites.count %>
+	<% else %>
+		<%= link_to post_favorites_path(@post), :style=> 'text-decoration: none;', method: :post do %>
+		<i class="far fa-heart"></i>
+		<% end %>
+		<%= @post.favorites.count %>
+	<% end %>
+<!-- コメント欄 -->
+	<section class="">
+		<div class="">
+		  <h4 class=""><%= @post.comments.count %>件コメント</h4>
+		</div>
+		<ol>
+			<% @post.comments.each do |comment| %>
+			<li class="comment">
+				<div class="avatar">
+					<%= attachment_image_tag comment.user, :profile_image, size: '35x35', fallback: "no_image.jpg" %>
+				</div>
+				<div class="">
+					<a href="" class=""><%= comment.user.name %></a>
+					<span class="comment-meta">
+						<span class="comment-date"><%= comment.created_at.strftime('%Y/%m/%d') %></span>
+					</span>
+				</div>
+				<div class="comment-entry"><%= comment.comment %></div>
+			</li>
+			<% end %>
+		</ol>
+<!-- コメント送信フォーム -->
+		<%= form_for [@post, @comment] do |f| %>
+			<div class="">
+				<%= f.text_area :comment, rows:'5', placeholder: "コメント", class: '' %>
+			</div>
+			<div class="">
+				<%= f.submit "コメントを送信", class: 'btn btn-lg' %>
+			</div>
+		<% end %>
+	</section>
+</section>
