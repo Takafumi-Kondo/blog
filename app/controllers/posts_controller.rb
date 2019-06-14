@@ -34,6 +34,11 @@ class PostsController < ApplicationController
   def destroy
   end
 
+  def timeline
+    @user = current_user
+    @users = @user.following.page(params[:page]).per(3).order("created_at DESC")
+  end
+
 
   private
 
