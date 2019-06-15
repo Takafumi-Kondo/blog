@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  #before_action :admin_user, only: [:admin]
 
   def new
     @post = Post.new
@@ -16,6 +17,7 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    @comment = Comment.new
   end
 
   def index
