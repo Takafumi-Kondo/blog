@@ -8,8 +8,8 @@
             <div class="row">
                 <!-- 検索フォーム -->
                 <div class="col-xs-5"><br>
-                    <%= form_tag root_path, :method => 'get' do %>
-                        <%= text_field_tag :search %>
+                    <%= form_tag(posts_path, :method => 'get') do %>
+                        <%= text_field_tag :search, params[:search] %>
                         <%= submit_tag "検索", :name => nil %>
                     <% end %>
                 </div>
