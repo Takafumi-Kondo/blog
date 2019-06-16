@@ -21,10 +21,19 @@ class PostsController < ApplicationController
   end
 
   def index
+    @posts = if params[:search]
+      Post.page(params[:page]).per(20).where('title LIKE ? OR body LIKE ?', "%#{params[:search]}%", "%#{params[:search]}%").reverse_order
+    else
+      Post.page(params[:page]).per(20).reverse_order
+    end
   end
 
   def admin
-    @posts = Post.page(params[:page]).per(20).reverse_order
+    @posts = if params[:search]
+      Post.page(params[:page]).per(20).where('title LIKE ? OR body LIKE ?', "%#{params[:search]}%", "%#{params[:search]}%").reverse_order
+    else
+      Post.page(params[:page]).per(20).reverse_order
+    end
   end
 
   def edit
