@@ -27,6 +27,8 @@ class ContactsController < ApplicationController
 	def update
 		@contact = Contact.find(params[:id])
 		if @contact.update(contact_params)
+			ContactMailer.contact_mail(@contact).deliver_now
+			flash[:notice] = "返信しました。"
 			redirect_to '/contacts'
 		end
 	end
@@ -44,3 +46,4 @@ class ContactsController < ApplicationController
 		params.require(:contact).permit(:user_id, :title, :contact_content, :responce)
 	end
 end
+#binding.pry
