@@ -4,11 +4,11 @@
 			<%= attachment_image_tag user, :profile_image, format: 'jpeg', fallback: 'no_image.jpg', size: '140x120', class: 'img-circle pull-left profile-img' %>
 			<p><%= user.name %></p>
 			<p><%= user.introduction%></p>
-			<%= %>
+			<%= render 'users/form' %>
 			<%= link_to "フォロワー: #{user.followers.count}", followers_user_path(user.id) %>
 			<!-- グラフ予定 -->
 			<!-- グラフ予定 -->
 		</section>
 	</div>
 </div>
-<%#= render 'users/list', user: @user %>
+<%#= render 'users/side', user: @user %>

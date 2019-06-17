@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
+    @genres_data = Post.joins(:genre).where(user_id: params[:id])
+    @emotions_data = Post.joins(:emotion).where(user_id: params[:id])
   end
 
   def index
@@ -18,7 +20,6 @@ class UsersController < ApplicationController
     else
       @user.posts.page(params[:page]).per(10).reverse_order
     end
-    #binding.pry
   end
 
   def update
