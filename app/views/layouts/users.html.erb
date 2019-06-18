@@ -15,14 +15,14 @@
   </head>
 
   <body>
-  	<div class="wrap">
+    <div class="wrap">
       <header>
-        <div class="">
-          <!-- <img src="" alt="サイトのヘッダー"> -->
+        <div class="headerimage">
+          <%= attachment_image_tag @user, :profile_headerimage, :fill, 1440, 250, format: 'jpeg', class: 'profile_headerimage' %>
         </div>
-    		<%=  render 'layouts/header' %>
+        <%=  render 'layouts/header' %>
       </header>
-  		<%= yield %>
+    <%= yield %>
 	</div>
   </body>
 </html>

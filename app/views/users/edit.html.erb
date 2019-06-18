@@ -10,6 +10,7 @@
 			<%= form_for(@user) do |f| %>
 				<%= attachment_image_tag @user, :profile_image, format: 'jpeg', fallback: 'no_image.jpg', size: '140x120', class: 'img-circle pull-left profile-img' %>
 				<%= f.attachment_field :profile_image %>
+				<%= f.attachment_field :profile_headerimage %>
 				<br>
 				<%= f.text_field :name, autofocus: true, class: '' %><br>
 				<br>
