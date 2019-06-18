@@ -1,12 +1,15 @@
 <div class="container">
 	<div class="row">
+		<div class="col-xs-9">
+		</div>
 <%#= link_to "タイムライン", timeline_path %>
 <!-- サイドプロフィールバー -->
-		<section class="col-xs-2">
+		<section class="col-xs-3 text-center">
 			<div class="row">
-				<div class="col-xs-12">
-					<%= attachment_image_tag @user, :profile_image, format: 'jpeg', fallback: 'no_image.jpg', size: '120x120', class: 'img-circle pull-left profile-img' %>
+				<div class="text-center">
+					<%= attachment_image_tag @user, :profile_image, format: 'jpeg', fallback: 'no_image.jpg', size: '120x120', class: 'profile-img' %>
 				</div>
+				<br>
 				<div class="">
 					<p><%= @user.name %></p>
 					<p><%= @user.introduction%></p>
@@ -17,7 +20,7 @@
 					<%= render 'users/form', user: @user %>
 				</div>
 			<!-- 円グラフ -->
-				<div class="text-left">
+				<div class="t">
 					<%= pie_chart @genres_data.group(:genre_name).count, height: '150px' %>
 				</div>
 				<div class="">
@@ -26,4 +29,8 @@
 			</div>
 		</section>
 	</div>
+</div>
+<div class="">
+	<p>日間PV数</p>
+	<%= line_chart @post_counts %>
 </div>

@@ -6,23 +6,23 @@
     <%= csp_meta_tag %>
     <!-- bootstrapレスポンシブ -->
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" >
+    <link href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c&display=swap" rel="stylesheet">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag "https://www.gstatic.com/charts/loader.js" %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
-    <link href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" >
   </head>
 
   <body>
-  	<div class="wrap">
+    <div class="wrap">
       <header>
-        <div class="">
-          <!-- <img src="" alt="サイトのヘッダー"> -->
+        <div class="headerimage">
+          <%= attachment_image_tag @user, :profile_headerimage, :fill, 1440, 250, format: 'jpeg', class: 'profile_headerimage' %>
         </div>
-    		<%=  render 'layouts/header' %>
+        <%=  render 'layouts/header' %>
       </header>
-  		<%= yield %>
+    <%= yield %>
 	</div>
   </body>
 </html>

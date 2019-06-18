@@ -1,48 +1,45 @@
 <section class="">
-	<h1>Posts#show</h1>
-	<p><%= @post.title %></p>
-	<p><%= @post.body %></p>
-<!-- いいね欄 favorited_by?はmodelに定義したやつ-->
-	<% if @post.favorited_by?(current_user) %>
-		<%= link_to post_favorites_path(@post), :style=> 'text-decoration: none;', method: :delete do %>
-			<i class="fa fa-heart" style="color: red;"></i>
-		<% end %>
-		<%= @post.favorites.count %>
-	<% else %>
-		<%= link_to post_favorites_path(@post), :style=> 'text-decoration: none;', method: :post do %>
-		<i class="far fa-heart"></i>
-		<% end %>
-		<%= @post.favorites.count %>
-	<% end %>
-<!-- コメント欄 -->
-	<section class="">
-		<div class="">
-		  <h4 class=""><%= @post.comments.count %>件コメント</h4>
-		</div>
-		<ol>
-			<% @post.comments.each do |comment| %>
-			<li class="comment">
-				<div class="avatar">
-					<%= attachment_image_tag comment.user, :profile_image, size: '35x35', fallback: "no_image.jpg" %>
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-9">
+				<h4><%= @post.title %></h4>
+				<p><%= markdown(@post.body).html_safe %></p>
+			<!-- いいね欄 favorited_by?はmodelに定義したやつ-->
+				<% if @post.favorited_by?(current_user) %>
+					<%= link_to post_favorites_path(@post), :style=> 'text-decoration: none;', method: :delete do %>
+						<i class="fa fa-heart" style="color: red;"></i>
+					<% end %>
+					<%= @post.favorites.count %>
+				<% else %>
+					<%= link_to post_favorites_path(@post), :style=> 'text-decoration: none;', method: :post do %>
+					<i class="far fa-heart"></i>
+					<% end %>
+					<%= @post.favorites.count %>
+				<% end %>
+			<!-- コメント欄 -->
+				<div class="row">
+					<div class="col-xs-10">
+						<%= render 'posts/comments', post: @post, comment: @comment %>
+						<%= number_with_delimiter(@page_views) %>
+					</div>
+				</div>
+			</div>
+
+			<aside class="col-xs-3">
+				<div class="text-center">
+					<%= attachment_image_tag @user, :profile_image, format: 'jpeg', fallback: 'no_image.jpg', size: '120x120', class: 'profile-img' %>
+				</div>
+				<br>
+				<div class="">
+					<p><%= @user.name %></p>
+					<p><%= @user.introduction%></p>
 				</div>
 				<div class="">
-					<a href="" class=""><%= comment.user.name %></a>
-					<span class="comment-meta">
-						<span class="comment-date"><%= comment.created_at.strftime('%Y/%m/%d') %></span>
-					</span>
+					<%= link_to "フォロー #{@user.following.count}", following_user_path(@user) %>
+					<%= link_to "フォロワー #{@user.followers.count}", followers_user_path(@user) %>
+					<%= render 'users/form', user: @user %>
 				</div>
-				<div class="comment-entry"><%= comment.comment %></div>
-			</li>
-			<% end %>
-		</ol>
-<!-- コメント送信フォーム -->
-		<%= form_for [@post, @comment] do |f| %>
-			<div class="">
-				<%= f.text_area :comment, rows:'5', placeholder: "コメント", class: '' %>
-			</div>
-			<div class="">
-				<%= f.submit "コメントを送信", class: 'btn btn-lg' %>
-			</div>
-		<% end %>
-	</section>
+			</aside>
+		</div>
+	</div>
 </section>
