@@ -6,6 +6,8 @@ class Post < ApplicationRecord
 	belongs_to :genre
 	belongs_to :emotion
 
+	is_impressionable counter_cache: true, unique: :all
+
 
 #渡されたユーザidがfavoriteテーブル内に存在してるか
 	def favorited_by?(user)

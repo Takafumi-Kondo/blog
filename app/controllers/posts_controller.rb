@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   #before_action :admin_user, only: [:admin]
+  impressionist :actions=>[:show]
 
   def new
     @post = Post.new
@@ -18,6 +19,9 @@ class PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     @comment = Comment.new
+    #impressionist(@post, nil, :unique => [:session_hash])
+    @page_views = @post.impressions_count
+    #binding.pry
   end
 
   def index
