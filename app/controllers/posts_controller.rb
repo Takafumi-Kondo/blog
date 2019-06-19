@@ -19,6 +19,7 @@ class PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     @comment = Comment.new
+    @user = User.find_by(id: @post.user)
     #impressionist(@post, nil, :unique => [:session_hash])
     @page_views = @post.impressions_count
     #binding.pry

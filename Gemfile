@@ -80,3 +80,6 @@ gem 'chartkick'
 #pic upload
 gem "refile", require: "refile/rails", github: 'manfe/refile'
 gem "refile-mini_magick"
+# show markdown
+gem 'redcarpet'
+gem 'coderay'
