@@ -18,7 +18,7 @@
     <div class="wrap">
       <header>
         <div class="headerimage">
-          <%= attachment_image_tag @user, :profile_headerimage, :fill, 1440, 250, format: 'jpeg', class: 'profile_headerimage' %>
+          <%= attachment_image_tag @user, :profile_headerimage, format: 'jpeg', width: "100%", height: "250px", class: 'profile_headerimage' %>
         </div>
         <%=  render 'layouts/header' %>
       </header>

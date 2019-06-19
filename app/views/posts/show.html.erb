@@ -17,29 +17,13 @@
 					<%= @post.favorites.count %>
 				<% end %>
 			<!-- コメント欄 -->
-				<div class="row">
-					<div class="col-xs-10">
-						<%= render 'posts/comments', post: @post, comment: @comment %>
-						<%= number_with_delimiter(@page_views) %>
-					</div>
-				</div>
+				<%= render 'posts/comments', post: @post, comment: @comment %>
+				<%= number_with_delimiter(@page_views) %>
 			</div>
-
-			<aside class="col-xs-3">
-				<div class="text-center">
-					<%= attachment_image_tag @user, :profile_image, format: 'jpeg', fallback: 'no_image.jpg', size: '120x120', class: 'profile-img' %>
-				</div>
-				<br>
-				<div class="">
-					<p><%= @user.name %></p>
-					<p><%= @user.introduction%></p>
-				</div>
-				<div class="">
-					<%= link_to "フォロー #{@user.following.count}", following_user_path(@user) %>
-					<%= link_to "フォロワー #{@user.followers.count}", followers_user_path(@user) %>
-					<%= render 'users/form', user: @user %>
-				</div>
-			</aside>
+			<div class="col-xs-3">
+		<!-- サイドバー -->
+				<%= render 'users/side', user: @user %>
+			</div>
 		</div>
 	</div>
 </section>

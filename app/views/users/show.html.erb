@@ -2,31 +2,12 @@
 	<div class="row">
 		<div class="col-xs-9">
 		</div>
-<%#= link_to "タイムライン", timeline_path %>
-<!-- サイドプロフィールバー -->
+	<!-- サイドバー -->
 		<section class="col-xs-3 text-center">
-			<div class="row">
-				<div class="text-center">
-					<%= attachment_image_tag @user, :profile_image, format: 'jpeg', fallback: 'no_image.jpg', size: '120x120', class: 'profile-img' %>
-				</div>
-				<br>
-				<div class="">
-					<p><%= @user.name %></p>
-					<p><%= @user.introduction%></p>
-				</div>
-				<div class="">
-					<%= link_to "フォロー #{@user.following.count}", following_user_path(@user) %>
-					<%= link_to "フォロワー #{@user.followers.count}", followers_user_path(@user) %>
-					<%= render 'users/form', user: @user %>
-				</div>
-			<!-- 円グラフ -->
-				<div class="t">
-					<%= pie_chart @genres_data.group(:genre_name).count, height: '150px' %>
-				</div>
-				<div class="">
-					<%= pie_chart @emotions_data.group(:emotion_name).count, height: '150px' %>
-				</div>
-			</div>
+			<%= render 'users/side', user: @user %>
+		<!-- 円グラフ -->
+			<%= pie_chart @genres_data.group(:genre_name).count %>
+			<%= pie_chart @emotions_data.group(:emotion_name).count %>
 		</section>
 	</div>
 </div>
