@@ -21,18 +21,14 @@
 	padding: 0;
 	box-sizing: border-box;
 }
-
-a {
-	text-decoration: none;
-}
-
 .clearfix::after {
   content: "";
   display: block;
   clear: both;
 }
+.row-eq-height {
+	display: flex;
+	flex-wrap: wrap;
+}
+
 /*ここから*/
-
-
-
-

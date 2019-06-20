@@ -1,33 +1,29 @@
-<section class="container">
-	<div class="row">
-		<div class="col-xs-3">
-			<div class="text-center">
-				<%= attachment_image_tag user, :profile_image, format: 'jpeg', fallback: 'no_image.jpg', size: '120x120', class: 'profile-img' %>
-			</div>
-			<br>
-			<div class="">
-				<p><%= user.name %></p>
-				<p><%= user.introduction%></p>
-			</div>
-			<div class="">
-				<%= link_to "フォロー #{user.following.count}", following_user_path(user) %>
-				<%= link_to "フォロワー #{user.followers.count}", followers_user_path(user) %>
-				<% if current_user != user %>
-					<% if current_user.following?(user) %>
-						<%= form_for(current_user.active_relationships.find_by(following_id: user.id), html: { method: :delete }) do |f| %>
-							<%= f.submit "フォロー解除" %>
-						<% end %>
-					<% else %>
-						<%= form_for(current_user.active_relationships.build) do |f| %>
-						<%= hidden_field_tag :following_id, user.id %>
-						<%= f.submit "フォロー" %>
-						<% end %>
-					<% end %>
-				<% end %>
-			</div>
-		</div>
+<div class="sidebar">
+	<div class="text-center">
+		<%= attachment_image_tag user, :profile_image, format: 'jpeg', fallback: 'no_image.jpg', class: 'profile-img' %>
 	</div>
-</section>
+	<br>
+	<div class="">
+		<p><%= user.name %></p>
+		<p class="introduction"><%= user.introduction%></p>
+	</div>
+	<div class="">
+		<%= link_to "フォロー #{user.following.count}", following_user_path(user) %>
+		<%= link_to "フォロワー #{user.followers.count}", followers_user_path(user) %>
+		<% if current_user != user %>
+			<% if current_user.following?(user) %>
+				<%= form_for(current_user.active_relationships.find_by(following_id: user.id), html: { method: :delete }) do |f| %>
+					<%= f.submit "フォロー解除" %>
+				<% end %>
+			<% else %>
+				<%= form_for(current_user.active_relationships.build) do |f| %>
+				<%= hidden_field_tag :following_id, user.id %>
+				<%= f.submit "フォロー" %>
+				<% end %>
+			<% end %>
+		<% end %>
+	</div>
+</div>
 <!-- フォローボタンページ -->
 
 <%#= render 'users/form', user: @user %>

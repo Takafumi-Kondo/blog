@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_09_233603) do
+ActiveRecord::Schema.define(version: 2019_06_20_002339) do
 
   create_table "comments", force: :cascade do |t|
     t.integer "user_id"
@@ -90,6 +90,7 @@ ActiveRecord::Schema.define(version: 2019_06_09_233603) do
     t.integer "impressions_count", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "post_headerimage_id"
   end
 
   create_table "relationships", force: :cascade do |t|

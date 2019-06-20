@@ -3,6 +3,8 @@
 		<div class="col-xs-12">
 		<h2>新規投稿</h2>
 		<%= form_for @post do |f| %>
+			<%= f.label :post_headerimage, "トップ画" %>
+				<%= f.attachment_field :post_headerimage %>
 			<%= f.label :title, "タイトル" %>
 				<%= f.text_field :title, class: 'form-control' %>
 			<%= f.label :body, "本文" %>

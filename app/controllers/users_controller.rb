@@ -5,6 +5,7 @@ class UsersController < ApplicationController
     @genres_data = Post.joins(:genre).where(user_id: params[:id])
     @emotions_data = Post.joins(:emotion).where(user_id: params[:id])
     @post_counts = Post.where(user_id: params[:id]).order(created_at: :ASC).group("date(created_at)").sum(:impressions_count)
+    @new_posts = Post.where(user_id: params[:id]).limit(6).reverse_order
     #@view_counts = Post.where(user_id: params[:id]).sum(:impressions_count)
     #product_favorite_count = Product.joins(:favorites).where(created_at: 1.weeks.ago..Time.now).group(:product_id).count
   end
