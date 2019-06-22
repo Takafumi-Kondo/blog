@@ -4,7 +4,7 @@ class ContactMailer < ApplicationMailer
 	def contact_mail(contact)
 		@contact = contact
 		mail(to:      @contact.user.email,
-				 subject: "お問い合わせありがとうございます。")
+			 subject: "お問い合わせありがとうございます。")
 	end
 end
 #binding.pry

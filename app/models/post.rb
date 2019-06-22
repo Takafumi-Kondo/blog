@@ -6,6 +6,8 @@ class Post < ApplicationRecord
 	belongs_to :genre
 	belongs_to :emotion
 
+	attachment :post_headerimage
+
 	is_impressionable counter_cache: true, unique: :all
 
 

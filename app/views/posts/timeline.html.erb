@@ -1,25 +1,35 @@
 <!-- フォローしているユーザーの投稿 -->
-<div class="container">
+<div class="container-fluid">
 	<div class="row">
-		<table class="table">
-		<% @users.each do |user| %>
-			<% @posts = Post.where(user_id: user.id).limit(1).order("created_at DESC") %>
-			<% @posts.each do |post| %>
-				<tr>
-					<td>
-						<%= attachment_image_tag post.user, :profile_image, format: 'jpeg', fallback: 'no_image.jpg', size: '45x45', class: 'img-circle pull-left profile-img' %>
-					</td>
-					<td>
-						<%= link_to user_path(post.user.id), class: '' do %>
-							<%= post.user.name %>
-						<% end %>
-					</td>
-					<td><%= post.title %></td>
-					<td><%= post.body.truncate(50) %></td>
-				</tr>
+		<div class="col-xs-8 col-xs-offset-1">
+			<table class="table">
+			<% @users.each do |user| %>
+				<% @posts = Post.where(user_id: user.id).limit(1).order("created_at DESC") %>
+				<% @posts.each do |post| %>
+					<tr>
+						<td width="5%">
+							<%= attachment_image_tag post.user, :profile_image, format: 'jpeg', fallback: 'no_image.jpg', size: '60x60' %>
+						</td>
+						<td width="15%">
+							<%= link_to user_path(post.user.id)  do %>
+								<%= post.user.name %>
+							<% end %>
+							<p class="posted_date"><%= post.created_at.strftime("%Y-%m-%d %H:%M") %></p>
+						</td>
+						<td>
+							<%= link_to post_path(post.id)  do %>
+								<h4><%= post.title %></h4>
+							<% end %>
+							<p><%= post.body.truncate(100) %></p>
+						</td>
+					</tr>
+				<% end %>
 			<% end %>
-		<% end %>
-		<%= paginate @users %>
-		</table>
+			<%= paginate @users %>
+			</table>
+		</div>
+		<aside class="col-xs-2 text-center">
+			<%= render 'users/side', user: @user %>
+		</aside>
 	</div>
 </div>

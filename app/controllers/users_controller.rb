@@ -4,7 +4,13 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @genres_data = Post.joins(:genre).where(user_id: params[:id])
     @emotions_data = Post.joins(:emotion).where(user_id: params[:id])
-    @post_counts = Post.where(user_id: params[:id]).order(created_at: :ASC).group("date(created_at)").sum(:impressions_count)
+    @post_counts = Post.where(user_id: params[:id]).order(created_at: :ASC).group('date(created_at)').sum(:impressions_count)
+    @new_posts = Post.where(user_id: params[:id]).page(params[:page]).per(6).reverse_order
+    @post_pv_counts = Post.where(user_id: params[:id]).group(:impressions_count).order(impressions_count: "DESC").limit(5)
+  #いいね数多い記事取得
+    post_favorite_count = Post.joins(:favorites).where(user_id: params[:id]).group(:post_id).count
+    post_favorited_ids = Hash[post_favorite_count.sort_by{ |_, v| -v }].keys
+    @post_popular = Post.where(id: post_favorited_ids)
     #@view_counts = Post.where(user_id: params[:id]).sum(:impressions_count)
     #product_favorite_count = Product.joins(:favorites).where(created_at: 1.weeks.ago..Time.now).group(:product_id).count
   end
