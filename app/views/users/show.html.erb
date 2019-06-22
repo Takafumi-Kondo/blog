@@ -1,29 +1,61 @@
 <div class="container-fluid">
 	<div class="row">
-		<section class="col-xs-8 col-xs-offset-1">
-			<h2 class="panel text-center">新着記事</h2>
+		<div class="col-xs-10 col-xs-offset-1">
+			<div class="row row-eq-height">
+				<% @post_pv_counts.each do |post| %>
+					<div class="col-xs-2 post_contents">
+						<%= attachment_image_tag post, :post_headerimage, format: 'jpeg', fallback: 'no_image.jpg', class: 'post_headerimage' %>
+						<%= link_to post_path(post.id), :style=> 'text-decoration: none;' do %>
+							<h4><%= post.title.truncate(20) %></h4>
+						<% end %>
+					</div>
+				<% end %>
+			</div>
+		</div>
+	</div>
+	<!-- 新着記事 -->
+	<div class="row">
+		<section class="col-xs-7 col-xs-offset-1">
+			<h2 class="panel panel-default text-center section_title">新着記事</h2>
 			<div class="row row-eq-height">
 				<% @new_posts.each do |post| %>
-					<div class="col-xs-6 post_contents">
+					<div class="col-xs-5 post_contents">
 						<%= attachment_image_tag post, :post_headerimage, format: 'jpeg', fallback: 'no_image.jpg', class: 'post_headerimage' %>
 						<h4><%= post.title %></h4>
 						<p class="text-right posted_date_list">
 							投稿日:<%= post.created_at.strftime("%Y-%m-%d") %><br>
 							最終更新日:<%= post.updated_at.strftime("%Y-%m-%d") %>
 						</p>
-						<div class="text-center">
-							<%= link_to "続きを読む", post_path(post.id), :style=> 'text-decoration: none;' %>
+						<div class="text-center panel panel-default panel-body">
+							<%= link_to "記事を読む", post_path(post.id), :style=> 'text-decoration: none;' %>
 						</div>
 					</div>
 				<% end %>
 			</div>
+			<%= paginate @new_posts %>
 		</section>
 	<!-- サイドバー -->
-		<section class="col-xs-2 text-center">
+		<section class="col-xs-3 text-center">
 			<%= render 'users/side', user: @user %>
 		<!-- 円グラフ -->
 			<%= pie_chart @genres_data.group(:genre_name).count %>
 			<%= pie_chart @emotions_data.group(:emotion_name).count %>
+			<br>
+			<br>
+			<br>
+			<section>
+				<h3 class="col-xs-offset-1 panel panel-default section_title">人気記事ランキング</h3>
+				<% @post_popular.each do |post| %>
+					<div class="row post_popular">
+						<div class="col-xs-5 col-xs-offset-1">
+							<%= attachment_image_tag post, :post_headerimage, format: 'jpeg', fallback: 'no_image.jpg', class: 'post_headerimage' %>
+						</div>
+						<%= link_to post_path(post.id), :style=> 'text-decoration: none;' do %>
+							<h4 class="text-left"><%= post.title.truncate(50) %></h4>
+						<% end %>
+					</div>
+				<% end %>
+			</section>
 		</section>
 	</div>
 </div>
