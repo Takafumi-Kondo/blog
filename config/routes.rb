@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root to: 'posts#index'
+  root to: 'posts#top'
   get '/about' => 'static_pages#about'
   get 'posts/admin' => 'posts#admin'
   get 'timeline' => 'posts#timeline'
