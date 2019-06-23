@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get '/about' => 'static_pages#about'
   get 'posts/admin' => 'posts#admin'
   get 'timeline' => 'posts#timeline'
+  get 'top' => 'posts#top'
 
   devise_for :users
   resources :genres,         only: [:create, :index, :update, :destroy]

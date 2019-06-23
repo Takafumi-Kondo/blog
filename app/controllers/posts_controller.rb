@@ -55,6 +55,24 @@ class PostsController < ApplicationController
     @users = @user.following.page(params[:page]).per(3).order("created_at DESC")
   end
 
+  def top
+    @posts_pv_count = Post.page(params[:page]).group(:impressions_count).order(impressions_count: :DESC).limit(5)
+# ジャンル別人気欄
+    genre_post_count = Post.page(params[:page]).group(:genre_id).count
+    genre_post_ids = Hash[genre_post_count.sort_by{ |_, v| -v }].keys
+    @genre_popular_posts = Post.where(genre_id: genre_post_ids[0]).order(impressions_count: 'DESC').limit(4)
+    @genre_popular_posts2 = Post.where(genre_id: genre_post_ids[1]).order(impressions_count: 'DESC').limit(4)
+    @genre_popular_posts3 = Post.where(genre_id: genre_post_ids[2]).order(impressions_count: 'DESC').limit(4)
+# ここまで
+    @posts = Post.page(params[:page]).per(10).reverse_order
+    post_favorite_count = Post.joins(:favorites).group(:post_id).count
+    post_favorited_ids = Hash[post_favorite_count.sort_by{ |_, v| -v }].keys
+    @popular_posts = Post.where(id: post_favorited_ids)
+    popular_user_count = User.joins(:passive_relationships).group(:following_id).count
+    popular_user_ids = Hash[popular_user_count.sort_by{ |_, v| -v }].keys
+    @popular_users = User.where(id: popular_user_ids)
+  end
+
 
   private
 
