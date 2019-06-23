@@ -1,25 +1,35 @@
-<article class="container">
+<div class="container">
 	<div class="row">
-		<section class="col-xs-8">
+		<section class="col-xs-9">
 			<h2>記事管理</h2>
 <!-- 自身の記事一覧 -->
 			<%= render 'posts/list', posts: @posts %>
 		</section>
 <!-- 右バー ユーザー編集 -->
-		<section class="col-xs-4">
+		<section class="col-xs-3">
 			<%= form_for(@user) do |f| %>
-				<%= attachment_image_tag @user, :profile_image, format: 'jpeg', fallback: 'no_image.jpg', size: '140x120', class: 'img-circle pull-left profile-img' %>
+				<div class="row">
+					<div class="col-xs-12">
+						<%= attachment_image_tag @user, :profile_image, format: 'jpeg', fallback: 'no_image.jpg', size: '140x120', class: 'img-circle pull-left profile-img' %>
+					</div>
+				</div>
+				<br>
+				<p>プロフィール画像</p>
 				<%= f.attachment_field :profile_image %>
+				<br>
+				<P>マイページヘッダー画像</P>
 				<%= f.attachment_field :profile_headerimage %>
 				<br>
+				<p>ユーザーネーム</p>
 				<%= f.text_field :name, autofocus: true, class: '' %><br>
 				<br>
-				<%= f.text_area :introduction, class: '' %>
+				<p>紹介文</p>
+				<%= f.text_area :introduction, size: '30x10' %>
 				<br>
-				<%= f.submit "更新する", class: '' %>
+				<%= f.submit "更新する" %>
 			<% end %>
 			<%#= link_to "パスワードの再設定はこちら", new_password_path(resource_name) %>
 			<%#= link_to "メールアドレス変更はこちら", confirmation_url(@resource, confirmation_token: @token) %>
 		</section>
 	</div>
-</article>
+</div>

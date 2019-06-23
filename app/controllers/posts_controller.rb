@@ -52,7 +52,8 @@ class PostsController < ApplicationController
 
   def timeline
     @user = current_user
-    @users = @user.following.page(params[:page]).per(3).order("created_at DESC")
+    @users = @user.following.all
+    @timeline = Post.where(user_id: @users).order(created_at: :DESC).page(params[:page]).per(20)
   end
 
   def top
