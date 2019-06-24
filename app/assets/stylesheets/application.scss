@@ -31,8 +31,55 @@
 	flex-wrap: wrap;
 }
 
-/*ここから*/
 
+/*スライド関連*/
+.top {
+	margin: 0 20px 50px;
+}
+.top_contents div {
+	height: 400px;
+	margin: 20px 0;
+}
+
+.item {
+	width: 300px;
+	padding: 0 20px;
+	img {
+		width: 100%;
+		height: 55%;
+	}
+}
+
+.slick-dots {
+	text-align: center;
+	margin-left: 5px;
+	li {
+		display: inline-block;
+		margin: 0 5px;
+	}
+	button {
+		padding: 0;
+		border: none;
+		width: 10px;
+		height: 10px;
+		border-radius: 50%;
+		background-color: silver;
+		color: transparent;/*数字消す*/
+	}
+	.slick-active {
+		button {
+		  background-color: black;
+		}
+	}
+}
+/*ここまで*/
+
+a {
+	text-decoration: none;
+}
+.header_link {
+	list-style: none;
+}
 .post_headerimage {
 	width: 100%;
 	height: 50%;

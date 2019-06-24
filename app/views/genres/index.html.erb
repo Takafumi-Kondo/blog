@@ -1,27 +1,23 @@
-<article class="container">
-	<div class="row">
-		<section class="">
-		   <h1>ジャンル一覧</h1>
-	    </section>
-        <section class="">
-          <%= form_for(@genre) do |f| %>
-            <div class="field">
+<section class="container">
+    <div class="row">
+        <div class="col-xs-3">
+            <h1>ジャンル一覧</h1>
+        </div>
+        <div class="col-xs-3 col-xs-offset-6">
+            <%= form_for(@genre) do |f| %>
+                <br>
                 <%= f.text_field :genre_name, required: true, class: 'form-conntrol' %>
-            </div>
-            <div class="action pull-right">
-                <%= f.submit "新規登録", class: 'btn btn-default' %>
-            </div>
-          <% end %>
-		</section>
+                    <%= f.submit "新規登録", class: 'btn btn-default' %>
+            <% end %>
+        </div>
     </div>
-
-	<section class="row">
-		<table class="table table-hover">
+    <div class="row">
+        <table class="table table-hover">
             <thead>
                 <tr class="info">
                     <th>ID</th>
-                    <th>ジャンル名</t>
-                    <th></th>
+                    <th>ジャンル名</th>
+                    <th>編集</th>
                     <th></th>
                     <th></th>
                 </tr>
@@ -41,5 +37,5 @@
             </tbody>
         </table>
         <%= paginate @genres %>
-	</section>
-</article>
+    </div>
+</section>

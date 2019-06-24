@@ -1,11 +1,12 @@
 <table class="table">
 	<thead>
 		<tr class="info">
-			<th>ID</th>
-			<th>タイトル</th>
+			<th width="1%">ID</th>
+			<th width="20%">タイトル</th>
 			<th>本文</th>
-			<th></th>
-			<th></th>
+			<th width="8%"></th>
+			<th width="8%"></th>
+			<th width="8%"></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -15,6 +16,7 @@
 			<td><%= post.title %></td>
 			<td><%= post.body.truncate(50) %></td>
 			<td><%= link_to "詳細", post_path(post.id) %></td>
+			<td><%= link_to "編集", edit_post_path(post.id) %></td>
 			<td><%= link_to "削除", post_path(post.id), method: :delete, "data-confirm" => "削除しますか？", class: 'btn-sm' %></td>
 		</tr>
 	<% end %>
