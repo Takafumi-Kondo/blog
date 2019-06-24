@@ -1,44 +1,33 @@
 <section class="container">
-	<div class="row">
-		<div class="">
-			<%= link_to posts_path do %>
-				<h2>記事一覧</h2>
-			<% end %>
-		</div>
-
-		<% if @posts.count == 0 %>
-		<% else %>
-			<table class="table">
-				<thead>
-					<tr class="info">
-						<th>ユーザー名</th>
-						<th>タイトル</th>
-						<th>本文</th>
-					</tr>
-				</thead>
-				<tbody>
+	<%= link_to posts_path do %>
+		<h2>記事一覧</h2>
+	<% end %>
+<!-- 検索フォーム -->
+	<% if @posts.count == 0 %>
+	<% else %>
+		<div class="row">
+			<div class="post_list">
+				<div class="row row-eq-height">
 					<% @posts.each do |post| %>
-					<tr class="active">
-						<td>
-							<%= link_to user_path(post.user.id) do %>
-								<%= post.user.name %>
-							<% end %>
-						</td>
-						<td>
-							<%= link_to post_path(post.id) do %>
-								<%= post.title %>
-							<% end %>
-						</td>
-						<td>
-							<%= link_to post_path(post.id) do %>
-								<%= post.body.truncate(50) %>
-							<% end %>
-						</td>
-					</tr>
+						<div class="col-xs-4 new_contents">
+							<div class="row">
+								<div class="col-xs-6">
+									<%= attachment_image_tag post, :post_headerimage, format: 'jpeg', fallback: 'no_image.jpg', class: 'post_headerimage' %>
+								</div>
+								<%= link_to post_path(post.id), :style=> 'text-decoration: none;' do %>
+									<h4><%= post.title.truncate(30) %></h4>
+								<% end %>
+								<%= link_to user_path(post.user.id), :style=> 'text-decoration: none;' do %>
+									<p><%= post.user.name %></p>
+								<% end %>
+								<p><%= post.genre.genre_name %></p>
+								<p class="text-right"><%= post.created_at.strftime("%Y-%m-%d") %></p>
+							</div>
+						</div>
 					<% end %>
-				</tbody>
-			</table>
-		<% end %>
+				</div>
+			</div>
+		</div>
 		<%= paginate @posts %>
-	</div>
+	<% end %>
 </section>

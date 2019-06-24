@@ -20,9 +20,11 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @comment = Comment.new
     @user = User.find_by(id: @post.user)
-    #impressionist(@post, nil, :unique => [:session_hash])
     @page_views = @post.impressions_count
-    #binding.pry
+# 人気ランキング
+    post_favorite_count = Post.joins(:favorites).where(user_id: @user).group(:post_id).count
+    post_favorited_ids = Hash[post_favorite_count.sort_by{ |_, v| -v }].keys
+    @popular_posts = Post.where(id: post_favorited_ids).limit(5)
   end
 
   def index
@@ -42,12 +44,21 @@ class PostsController < ApplicationController
   end
 
   def edit
+    @post = Post.find(params[:id])
   end
 
   def update
+    @post = Post.find(params[:id])
+    if @post.update(post_params)
+      redirect_to post_path
+    else
+      render :edit
+    end
   end
 
   def destroy
+    post = Post.find(params[:id])
+    post.destroy
   end
 
   def timeline

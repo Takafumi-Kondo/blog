@@ -1,13 +1,12 @@
-<article class="container">
+<div class="container">
     <div class="row">
         <section class="col-xs-6 col-xs-offset-3">
             <h1>お問い合わせ</h1>
             <%= form_for @contact do |f| %>
-                <%#= f.text_field :email, placeholder: "メールアドレス", class: 'form-control input-sm' %>
                 <%= f.text_field :title, placeholder: "件名", required: true, class: 'form-control input-sm' %>
-                <%= f.text_area :contact_content, placeholder: "内容", class: 'form-control input-sm' %>
+                <%= f.text_area :contact_content, rows: '10' ,placeholder: "内容", class: 'form-control input-sm' %>
                 <%= f.submit "送信", class: 'btn btn-default input-sm' %>
             <% end %>
         </section>
     </div>
-</article>
+</div>

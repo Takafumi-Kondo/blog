@@ -1,45 +1,36 @@
-<article class="container">
+<div class="container">
     <div class="row">
         <section class="col-xs-10 col-xs-offset-1">
         	<h2>問い合わせ詳細</h2>
-        	<table class="table">
-        	    <thead>
-            		<tr class="info">
-            			<th>投稿日時</th>
-            			<th>ユーザー名</th>
-            			<th>件名</th>
-                        <th>内容</th>
-            		</tr>
-        		</thead>
-        		<tbody>
-            		<tr class="active">
-            			<td><%= @contact.created_at.strftime("%Y-%m-%d %H:%M") %></td>
-            			<td><%= @contact.user.name %></td>
-            			<td><%= @contact.title %></td>
-            			<td><%= @contact.contact_content %></td>
-            		</tr>
-        		</tbody>
-        	</table>
+            <ul class="">
+                <li>
+                    <p>投稿日時: <%= @contact.created_at.strftime("%Y-%m-%d %H:%M") %></p>
+                </li>
+                <li>
+                    <p>ユーザーID: <%= @contact.user.id %></p>
+                </li>
+                <li>
+                    <P>ユーザー名: <%= @contact.user.name %></P>
+                </li>
+                <li>
+                    <p>件名: <%= @contact.title %></p>
+                </li>
+                <li>
+                    <p>内容</p>
+                    <p><%= @contact.contact_content %></p>
+                </li>
+            </ul>
         </section>
     </div>
+    <br>
 <!-- 返信内容 -->
     <% if @contact.responce? %>
-    <div class="row">
-        <section class="col-xs-10 col-xs-offset-1">
-            <table class="table">
-                <thead>
-                    <tr class="info">
-                        <th>返信内容</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="active">
-                        <td><%= @contact.responce %></td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
-    </div>
+        <div class="row">
+            <section class="col-xs-10 col-xs-offset-1">
+                <h4>返信内容</h4>
+                <p><%= @contact.responce %></p>
+            </section>
+        </div>
     <% end %>
     <br>
     <br>
@@ -47,9 +38,9 @@
         <section class="col-xs-10 col-xs-offset-1">
         	<h3>返信フォーム</h3>
         	<%= form_for [@user, @contact] do |f| %>
-        		<%= f.text_area :responce, autofocus: true, required: true, :size=>"60x10" %><br>
+        		<%= f.text_area :responce, autofocus: true, required: true, size: '132x10' %><br>
         		<%= f.submit "返信", class: 'btn btn-default' %>
         	<% end %>
     	</section>
 	</div>
-</article>
+</div>

@@ -1,2 +1,20 @@
-<h1>Posts#edit</h1>
-<p>Find me in app/views/posts/edit.html.erb</p>
+<section class="container">
+	<div class="row">
+		<div class="col-xs-12">
+			<h2>編集</h2>
+			<%= form_for @post do |f| %>
+				<%= f.label :post_headerimage, "トップ画" %>
+					<%= f.attachment_field :post_headerimage %>
+				<%= f.label :title, "タイトル" %>
+					<%= f.text_field :title, class: 'form-control' %>
+				<%= f.label :body, "本文" %>
+					<%= f.text_area :body, rows:'20', class: 'form-control input-lg' %><br>
+				<%= f.label :genre_id, "ジャンル" %>
+					<%= f.collection_select :genre_id, Genre.all, :id, :genre_name, class: 'form-control input-sm' %>
+				<%= f.label :emotion_id, "気分" %>
+					<%= f.collection_select :emotion_id, Emotion.all, :id, :emotion_name, class: 'form-control input-sm' %>
+			<%= f.submit "編集" %>
+			<% end %>
+		</div>
+	</div>
+</section>

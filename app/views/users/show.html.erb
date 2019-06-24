@@ -52,7 +52,7 @@
 							<%= attachment_image_tag post, :post_headerimage, format: 'jpeg', fallback: 'no_image.jpg', class: 'post_headerimage' %>
 						</div>
 						<%= link_to post_path(post.id), :style=> 'text-decoration: none;' do %>
-							<h4 class="text-left"><%= post.title.truncate(50) %></h4>
+							<p class="text-left"><%= post.title.truncate(50) %></p>
 						<% end %>
 					</div>
 				<% end %>
