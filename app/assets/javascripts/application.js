@@ -12,9 +12,20 @@
 //
 //= require rails-ujs
 //= require activestorage
-//= require turbolinks
 //= require jquery
+//= require jquery_ujs
 //= require bootstrap-sprockets
 //= require_tree .
 //= require chartkick
 //= require Chart.bundle
+
+$(document).ready(function(){
+	$('.top_contents').slick({
+		autoplay: true,
+		autoplaySpeed: 3000,
+		arrows: false,
+		dots: true,
+		centerMode: true,
+		variableWidth: true,//スライド幅を可変にするか
+	});
+});
