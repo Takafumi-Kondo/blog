@@ -34,4 +34,17 @@ $(document).ready(function(){
 		contentSelector: '.jscroll',//読み込む要素指定
 		nextSelector: 'span.next:last a'//次ページ指定 next:lastで最後のリンクのみを読み込むようにしている。
 	});
+// クリックでトップページへ
+	$('.toppage').click(function() {
+		$("html,body").animate({scrollTop:0}, "normal");//scrollTop:0でウィンドウの一番上指定
+	});
+
+	$('.toppage').hide();
+    $(window).scroll(function() {
+        if($(window).scrollTop() > 0) {
+            $('.toppage').slideDown(200);
+        } else {
+            $('.toppage').slideUp(200);
+        }
+    });
 });
