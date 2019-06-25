@@ -15,27 +15,33 @@
 		<% end %>
 	</div>
 </div>
-
 <div class="container-fluid">
 	<div class="row">
+	<!-- 新着 -->
 		<section class="col-xs-7 col-xs-offset-1">
 			<h2 class="panel panel-default text-center section_title">新着記事</h2>
 			<div class="row row-eq-height">
 				<% @new_posts.each do |post| %>
-					<div class="col-xs-5 post_contents">
-						<%= attachment_image_tag post, :post_headerimage, format: 'jpeg', fallback: 'no_image.jpg', class: 'post_headerimage' %>
-						<h4><%= post.title %></h4>
-						<p class="text-right posted_date_list">
-							投稿日:<%= post.created_at.strftime("%Y-%m-%d") %><br>
-							最終更新日:<%= post.updated_at.strftime("%Y-%m-%d") %>
-						</p>
-						<div class="text-center panel panel-default panel-body">
-							<%= link_to "記事を読む", post_path(post.id), :style=> 'text-decoration: none;' %>
+					<div class="col-xs-6 post_contents">
+						<div class="row">
+							<div class="col-xs-5">
+								<%= attachment_image_tag post, :post_headerimage, format: 'jpeg', fallback: 'no_image.jpg', class: 'post_headerimage' %>
+							</div>
+							<div class="col-xs-7">
+								<h4><%= post.title.truncate(40) %></h4>
+								<p><%= post.genre.genre_name %></p>
+								<p class="text-right posted_date_list">
+									投稿日:<%= post.created_at.strftime("%Y-%m-%d") %>
+								</p>
+								<div class="text-center panel panel-default ">
+									<%= link_to "記事を読む", post_path(post.id), :style=> 'text-decoration: none;' %>
+								</div>
+							</div>
 						</div>
 					</div>
 				<% end %>
+				<%= paginate @new_posts %>
 			</div>
-			<%= paginate @new_posts %>
 		</section>
 	<!-- サイドバー -->
 		<section class="col-xs-3 text-center">

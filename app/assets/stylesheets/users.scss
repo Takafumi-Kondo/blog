@@ -20,8 +20,16 @@
 }
 
 .post_contents {
-	margin: 0 auto;
+	margin-bottom: 40px;
+	overflow: hidden;
 }
+.post_contents:hover {
+	transform: scale(1.13);
+	background-color: #ecf0f3;
+	box-shadow: 0 1px 1px #999;
+	transition-duration: 0.5s;/*掛ける時間*/
+}
+
 .popular_post {
 	margin-bottom: 30px;
 }

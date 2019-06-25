@@ -19,7 +19,7 @@
 }
 .post_headerimage {
 	width: 100%;
-	height: 50%;
+	max-height: 180px;
 }
 
 .genre_contents, .user_contents, .popular_contents, .new_contents {
@@ -41,7 +41,7 @@
 	width: 90%;
 }
 
-nav.pagination {
+.new_contents ~ nav.pagination {
 	display: none;
 }
 /*スクロール矢印*/
