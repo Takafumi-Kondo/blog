@@ -83,7 +83,7 @@ class PostsController < ApplicationController
     post_favorite_count = Post.joins(:favorites).group(:post_id).count
     post_favorited_ids = Hash[post_favorite_count.sort_by{ |_, v| -v }].keys
     @popular_posts = Post.where(id: post_favorited_ids)
-    @posts = Post.page(params[:page]).per(10).reverse_order
+    @posts = Post.page(params[:page]).per(9).reverse_order
   end
 
 

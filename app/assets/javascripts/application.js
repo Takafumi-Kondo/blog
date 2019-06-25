@@ -20,6 +20,7 @@
 //= require Chart.bundle
 
 $(document).ready(function(){
+// slick
 	$('.top_contents').slick({
 		autoplay: true,
 		autoplaySpeed: 3000,
@@ -27,5 +28,10 @@ $(document).ready(function(){
 		dots: true,
 		centerMode: true,
 		variableWidth: true,//スライド幅を可変にするか
+	});
+// jscroll
+	$('.jscroll').jscroll({
+		contentSelector: '.jscroll',//読み込む要素指定
+		nextSelector: 'span.next:last a'//次ページ指定 next:lastで最後のリンクのみを読み込むようにしている。
 	});
 });
