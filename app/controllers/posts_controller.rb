@@ -64,7 +64,7 @@ class PostsController < ApplicationController
   def timeline
     @user = current_user
     @users = @user.following.all
-    @timeline = Post.where(user_id: @users).order(created_at: :DESC).page(params[:page]).per(20)
+    @timeline = Post.page(params[:page]).where(user_id: @users).per(10).order(created_at: :DESC)
   end
 
   def top
@@ -83,7 +83,7 @@ class PostsController < ApplicationController
     post_favorite_count = Post.joins(:favorites).group(:post_id).count
     post_favorited_ids = Hash[post_favorite_count.sort_by{ |_, v| -v }].keys
     @popular_posts = Post.where(id: post_favorited_ids)
-    @posts = Post.page(params[:page]).per(10).reverse_order
+    @posts = Post.page(params[:page]).per(9).reverse_order
   end
 
 

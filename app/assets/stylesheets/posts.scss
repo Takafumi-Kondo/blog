@@ -33,15 +33,20 @@
 	max-height: 170px;
 }
 
-
-.timeline_profile {
-	padding-top: 20px;
-}
-
 .section_title {
 	padding: 20px 0;
 }
 
 .profile_image {
 	width: 90%;
+}
+
+nav.pagination {
+	display: none;
+}
+/*スクロール矢印*/
+.toppage {
+	position: fixed;
+	right: 30px;
+	bottom: 60px;
 }

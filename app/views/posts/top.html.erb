@@ -123,7 +123,7 @@
 	<div class="row">
 		<section class="new-posts">
 			<h3 class="panel panel-default section_title">新着記事</h3>
-			<div class="row row-eq-height">
+			<div class="jscroll">
 				<% @posts.each do |post| %>
 					<div class="col-xs-4 new_contents">
 						<div class="row">
@@ -141,7 +141,11 @@
 						</div>
 					</div>
 				<% end %>
+				<%= paginate @posts %>
 			</div>
 		</section>
+	</div>
+	<div class="toppage">
+		<i class="fas fa-arrow-circle-up fa-3x"></i>
 	</div>
 </div>
