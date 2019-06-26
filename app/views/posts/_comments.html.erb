@@ -21,9 +21,11 @@
 		</div>
 	</ol>
 	<!-- コメント送信フォーム -->
-	<%= form_for [post, comment] do |f| %>
-		<%= f.text_area :comment, rows:'3', placeholder: "コメント", class: 'form-control' %>
-		<%= f.submit "コメントを送信", class: 'btn btn-default' %>
+	<% if user_signed_in? %>
+		<%= form_for [post, comment] do |f| %>
+			<%= f.text_area :comment, rows:'3', placeholder: "コメント", class: 'form-control' %>
+			<%= f.submit "コメントを送信", class: 'btn btn-default' %>
+		<% end %>
 	<% end %>
 </section>
 <%#= render 'posts/comment', post: @post, comment: @comment %>

@@ -19,7 +19,7 @@
 }
 .post_headerimage {
 	width: 100%;
-	height: 50%;
+	max-height: 180px;
 }
 
 .genre_contents, .user_contents, .popular_contents, .new_contents {
@@ -32,6 +32,9 @@
 .new_content_image > img {
 	max-height: 170px;
 }
+.timeline_image > img {
+	max-height: 120px;
+}
 
 .section_title {
 	padding: 20px 0;
@@ -41,9 +44,10 @@
 	width: 90%;
 }
 
-nav.pagination {
+.new_contents ~ nav.pagination, .timeline_contents ~ nav.pagination {
 	display: none;
 }
+
 /*スクロール矢印*/
 .toppage {
 	position: fixed;
