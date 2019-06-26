@@ -1,75 +1,88 @@
-<div class="container-fluid top">
-	<div class="top_contents">
-		<% @post_pv_counts.each do |post| %>
-			<div class="item">
-				<%= attachment_image_tag post, :post_headerimage, format: 'jpeg', fallback: 'no_image.jpg' %>
-				<%= link_to post_path(post.id), :style=> 'text-decoration: none;' do %>
-					<h4><%= post.title.truncate(20) %></h4>
-				<% end %>
-				<p><%= post.genre.genre_name %></p>
-				<p class="text-right posted_date_list">
-					投稿日:<%= post.created_at.strftime("%Y-%m-%d") %><br>
-					最終更新日:<%= post.updated_at.strftime("%Y-%m-%d") %>
-				</p>
-			</div>
-		<% end %>
+<% if @new_posts.count == 0 %>
+	<div class="container-fluid">
+		<div class="row">
+			<section class="col-xs-7 col-xs-offset-1">
+				<h2 class="text-center">まだ記事はありません。</h2>
+			</section>
+			<section class="col-xs-3 text-center">
+				<%= render 'users/side', user: @user %>
+			</section>
+		</div>
 	</div>
-</div>
-<div class="container-fluid">
-	<div class="row">
-	<!-- 新着 -->
-		<section class="col-xs-7 col-xs-offset-1">
-			<h2 class="panel panel-default text-center section_title">新着記事</h2>
-			<div class="row row-eq-height">
-				<% @new_posts.each do |post| %>
-					<div class="col-xs-6 post_contents">
-						<div class="row">
-							<div class="col-xs-5">
-								<%= attachment_image_tag post, :post_headerimage, format: 'jpeg', fallback: 'no_image.jpg', class: 'post_headerimage' %>
-							</div>
-							<div class="col-xs-7">
-								<h4><%= post.title.truncate(40) %></h4>
-								<p><%= post.genre.genre_name %></p>
-								<p class="text-right posted_date_list">
-									投稿日:<%= post.created_at.strftime("%Y-%m-%d") %>
-								</p>
-								<div class="text-center panel panel-default ">
-									<%= link_to "記事を読む", post_path(post.id), :style=> 'text-decoration: none;' %>
+<% else %>
+	<div class="container-fluid top">
+		<div class="top_contents">
+			<% @post_pv_counts.each do |post| %>
+				<div class="item">
+					<%= attachment_image_tag post, :post_headerimage, format: 'jpeg', fallback: 'no_image.jpg' %>
+					<%= link_to post_path(post.id), :style=> 'text-decoration: none;' do %>
+						<h4><%= post.title.truncate(20) %></h4>
+					<% end %>
+					<p><%= post.genre.genre_name %></p>
+					<p class="text-right posted_date_list">
+						投稿日:<%= post.created_at.strftime("%Y-%m-%d") %><br>
+						最終更新日:<%= post.updated_at.strftime("%Y-%m-%d") %>
+					</p>
+				</div>
+			<% end %>
+		</div>
+	</div>
+	<div class="container-fluid">
+		<div class="row">
+		<!-- 新着 -->
+			<section class="col-xs-7 col-xs-offset-1">
+				<h2 class="panel panel-default text-center section_title">新着記事</h2>
+				<div class="row row-eq-height">
+					<% @new_posts.each do |post| %>
+						<div class="col-xs-6 post_contents">
+							<div class="row">
+								<div class="col-xs-5">
+									<%= attachment_image_tag post, :post_headerimage, format: 'jpeg', fallback: 'no_image.jpg', class: 'post_headerimage' %>
+								</div>
+								<div class="col-xs-7">
+									<h4><%= post.title.truncate(40) %></h4>
+									<p><%= post.genre.genre_name %></p>
+									<p class="text-right posted_date_list">
+										投稿日:<%= post.created_at.strftime("%Y-%m-%d") %>
+									</p>
+									<div class="text-center panel panel-default ">
+										<%= link_to "記事を読む", post_path(post.id), :style=> 'text-decoration: none;' %>
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-				<% end %>
-				<%= paginate @new_posts %>
-			</div>
-		</section>
-	<!-- サイドバー -->
-		<section class="col-xs-3 text-center">
-			<%= render 'users/side', user: @user %>
-		<!-- 円グラフ -->
-			<%= pie_chart @genres_data.group(:genre_name).count %>
-			<%= pie_chart @emotions_data.group(:emotion_name).count %>
-			<br>
-			<br>
-			<br>
-		<!-- 人気記事 -->
-			<section>
-				<h3 class="col-xs-offset-1 panel panel-default section_title">人気記事ランキング</h3>
-				<% @popular_posts.each do |post| %>
-					<div class="row popular_post">
-						<div class="col-xs-5 col-xs-offset-1">
-							<%= attachment_image_tag post, :post_headerimage, format: 'jpeg', fallback: 'no_image.jpg', class: 'post_headerimage' %>
-						</div>
-						<%= link_to post_path(post.id), :style=> 'text-decoration: none;' do %>
-							<p class="text-left"><%= post.title.truncate(50) %></p>
-						<% end %>
-					</div>
-				<% end %>
+					<% end %>
+					<%= paginate @new_posts %>
+				</div>
 			</section>
-		</section>
+		<!-- サイドバー -->
+			<section class="col-xs-3 text-center">
+				<%= render 'users/side', user: @user %>
+			<!-- 円グラフ -->
+				<%= pie_chart @genres_data.group(:genre_name).count %>
+				<%= pie_chart @emotions_data.group(:emotion_name).count %>
+				<br>
+				<br>
+				<br>
+			<!-- 人気記事 -->
+				<section>
+					<h3 class="col-xs-offset-1 panel panel-default section_title">人気記事ランキング</h3>
+					<% @popular_posts.each do |post| %>
+						<div class="row popular_post">
+							<div class="col-xs-5 col-xs-offset-1">
+								<%= attachment_image_tag post, :post_headerimage, format: 'jpeg', fallback: 'no_image.jpg', class: 'post_headerimage' %>
+							</div>
+							<%= link_to post_path(post.id), :style=> 'text-decoration: none;' do %>
+								<p class="text-left"><%= post.title.truncate(50) %></p>
+							<% end %>
+						</div>
+					<% end %>
+				</section>
+			</section>
+		</div>
 	</div>
-</div>
-<div class="">
-	<p>日間PV数</p>
-	<%= line_chart @post_counts %>
-</div>
+	<div class="">
+		<p>日間PV数</p>
+		<%= line_chart @post_counts %>
+	</div>
+<% end %>

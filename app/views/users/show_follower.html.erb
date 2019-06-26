@@ -6,10 +6,10 @@
 				<% @users.each do |user| %>
 				<tr>
 					<td>
-						<%= attachment_image_tag user, :profile_image, format: 'jpeg', fallback: 'no_image.jpg', size: '45x45', class: 'img-circle pull-left profile-img' %>
+						<%= attachment_image_tag user, :profile_image, format: 'jpeg', fallback: 'no_image.jpg', class: 'profile-img' %>
 					</td>
 					<td>
-						<%= link_to user_path(user.id), class: '' do %>
+						<%= link_to user_path(user.id), :style=> 'text-decoration: none;' do %>
 							<%= user.name %>
 						<% end %>
 					</td>

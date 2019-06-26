@@ -6,11 +6,11 @@
 			<%= render 'posts/list', posts: @posts %>
 		</section>
 <!-- 右バー ユーザー編集 -->
-		<section class="col-xs-3">
+		<section class="col-xs-3 text-center">
 			<%= form_for(@user) do |f| %>
 				<div class="row">
-					<div class="col-xs-12">
-						<%= attachment_image_tag @user, :profile_image, format: 'jpeg', fallback: 'no_image.jpg', size: '140x120', class: 'img-circle pull-left profile-img' %>
+					<div class="col-xs-9 col-xs-offset-1">
+						<%= attachment_image_tag @user, :profile_image, format: 'jpeg', fallback: 'no_image.jpg' %>
 					</div>
 				</div>
 				<br>
@@ -24,7 +24,7 @@
 				<%= f.text_field :name, autofocus: true, class: '' %><br>
 				<br>
 				<p>紹介文</p>
-				<%= f.text_area :introduction, size: '30x10' %>
+				<%= f.text_area :introduction, size: '30x10', value: "自己紹介欄" %>
 				<br>
 				<%= f.submit "更新する" %>
 			<% end %>

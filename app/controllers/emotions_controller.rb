@@ -1,5 +1,5 @@
 class EmotionsController < ApplicationController
-  #before_action :admin_user
+  before_action :admin_user
 
   def create
   	@emotion = Emotion.new(emotion_params)

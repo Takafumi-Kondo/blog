@@ -18,15 +18,20 @@
 				<p class="text-right"><%= @post.emotion.emotion_name %></p>
 				<br>
 		<!-- いいね欄 favorited_by?はmodelに定義したもの-->
-				<% if @post.favorited_by?(current_user) %>
-					<%= link_to post_favorites_path(@post), :style=> 'text-decoration: none;', method: :delete do %>
-						<i class="fa fa-heart" style="color: red;"></i>
+				<% if user_signed_in? %>
+					<% if @post.favorited_by?(current_user) %>
+						<%= link_to post_favorites_path(@post), :style=> 'text-decoration: none;', method: :delete do %>
+							<i class="fa fa-heart" style="color: red;"></i>
+						<% end %>
+						<%= @post.favorites.count %>
+					<% else %>
+						<%= link_to post_favorites_path(@post), :style=> 'text-decoration: none;', method: :post do %>
+							<i class="far fa-heart"></i>
+						<% end %>
+						<%= @post.favorites.count %>
 					<% end %>
-					<%= @post.favorites.count %>
 				<% else %>
-					<%= link_to post_favorites_path(@post), :style=> 'text-decoration: none;', method: :post do %>
-						<i class="far fa-heart"></i>
-					<% end %>
+					<i class="far fa-heart"></i>
 					<%= @post.favorites.count %>
 				<% end %>
 		<!-- コメント欄 -->

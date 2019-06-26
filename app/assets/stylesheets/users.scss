@@ -9,6 +9,7 @@
 .profile-img {
 	width: 120px;
 	height: 120px;
+	margin: 0 auto;
 }
 .introduction .posted_date_list {
 	text-align: left;
@@ -24,7 +25,7 @@
 	overflow: hidden;
 }
 .post_contents:hover {
-	transform: scale(1.13);
+	transform: scale(1.05);
 	background-color: #ecf0f3;
 	box-shadow: 0 1px 1px #999;
 	transition-duration: 0.5s;/*掛ける時間*/

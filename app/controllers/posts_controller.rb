@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
-  #before_action :admin_user, only: [:admin]
-  impressionist :actions=>[:show]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy, :timeline]
+  before_action :admin_user, only: [:admin]
+  impressionist :actions=>[:show]#Pvカウント
 
   def new
     @post = Post.new
@@ -10,8 +11,10 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.user = current_user
     if @post.save
+      flash[:notice] = "投稿しました。"
       redirect_to post_path(@post.id)
     else
+      flash[:notice] = "失敗しました。必要項目を入力してください。"
       render :new
     end
   end
@@ -45,11 +48,15 @@ class PostsController < ApplicationController
 
   def edit
     @post = Post.find(params[:id])
+    if @post.user_id != current_user.id
+      redirect_to root_path
+    end
   end
 
   def update
     @post = Post.find(params[:id])
     if @post.update(post_params)
+      flash[:notice] = "更新しました。"
       redirect_to post_path
     else
       render :edit
@@ -59,6 +66,14 @@ class PostsController < ApplicationController
   def destroy
     post = Post.find(params[:id])
     post.destroy
+    if current_user.admin?
+      flash[:notice] = "削除しました。"
+      redirect_to posts_admin_path
+    else
+      user = User.find_by(id: post.user)
+      flash[:notice] = "削除しました。"
+      redirect_to edit_user_path(user)
+    end
   end
 
   def timeline

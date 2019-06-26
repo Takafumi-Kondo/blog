@@ -2,27 +2,33 @@
     <div class="container">
         <div class="row">
             <!-- 検索フォーム -->
-            <div class="col-xs-3"><br>
+            <div class="col-xs-3 header_search">
                 <%= form_tag(posts_path, :method => 'get') do %>
-                    <%= text_field_tag :search, params[:search] %>
-                    <%= submit_tag "検索", :name => nil %>
+                    <div class="row">
+                        <div class="col-xs-10">
+                            <%= text_field_tag :search, params[:search], class: 'form-control' %>
+                        </div>
+                        <div class="col-xs-1">
+                            <%= submit_tag "検索", :name => nil, class: 'btn btn-default' %>
+                        </div>
+                    </div>
                 <% end %>
             </div>
-
-            <div class="col-xs-6 col-xs-offset-1">
-                <div class="collapse navbar-collapse" id="navbarEexample1">
-                    <ul class="nav navbar-nav">
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">管理 <span class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><%= link_to "ユーザー管理", users_path %></li>
-                                <li><%= link_to "問い合わせ管理", contacts_path %></li>
-                                <li><%= link_to "記事管理", posts_admin_path %></li>
-                                <li><%= link_to "ジャンル管理", genres_path %></li>
-                                <li><%= link_to "気分管理", emotions_path %></li>
-                            </ul>
-                        </li>
-                        <% if user_signed_in? %>
+        <!-- ヘッダーnavバー -->
+            <% if current_user && current_user.admin == true %>
+                <div class="col-xs-6 col-xs-offset-1">
+                    <div class="collapse navbar-collapse" id="navbarEexample1">
+                        <ul class="nav navbar-nav">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">管理 <span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><%= link_to "ユーザー管理", users_path %></li>
+                                    <li><%= link_to "問い合わせ管理", contacts_path %></li>
+                                    <li><%= link_to "記事管理", posts_admin_path %></li>
+                                    <li><%= link_to "ジャンル管理", genres_path %></li>
+                                    <li><%= link_to "気分管理", emotions_path %></li>
+                                </ul>
+                            </li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">ユーザー関連 <span class="caret"></span></a>
                                 <ul class="dropdown-menu" role="menu">
@@ -37,14 +43,39 @@
                             <li>
                                 <%= link_to "このサイトについて", about_path %>
                             </li>
-                        <% else %>
+                        </ul>
+                    </div>
+                </div>
+            <% elsif current_user && current_user.admin == false %>
+                <div class="col-xs-5 col-xs-offset-2">
+                    <div class="collapse navbar-collapse" id="navbarEexample1">
+                        <ul class="nav navbar-nav">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">ユーザー関連 <span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><%= link_to "新規投稿", new_post_path %></li>
+                                    <li><%= link_to "ユーザー記事管理", edit_user_path(current_user) %></li>
+                                    <li><%= link_to "問い合わせ", new_contact_path %></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <%= link_to "タイムライン", timeline_path %>
+                            </li>
                             <li>
                                 <%= link_to "このサイトについて", about_path %>
-                            <li>
-                        <% end %>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            <% else %>
+                <div class="col-xs-3 col-xs-offset-4">
+                    <ul class="nav navbar-right">
+                        <li>
+                            <%= link_to "このサイトについて", about_path %>
+                        </li>
                     </ul>
                 </div>
-            </div>
+            <% end %>
 
             <div class="col-xs-2">
                 <li class="header_link">

@@ -1,5 +1,5 @@
 class GenresController < ApplicationController
-	#before_action :admin_user
+  before_action :admin_user
 
   def create
   	@genre = Genre.new(genre_params)

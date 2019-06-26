@@ -23,6 +23,10 @@ class ApplicationController < ActionController::Base
 		new_user_session_path
 	end
 
+    def admin_user
+      redirect_to(root_url) unless current_user.admin?
+    end
+
 
 	protected
 

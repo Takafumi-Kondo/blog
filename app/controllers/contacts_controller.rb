@@ -1,17 +1,19 @@
 class ContactsController < ApplicationController
-	#before_action ログインユーザー のみ
-	#before_action adminか
+	before_action :authenticate_user!
+	before_action :admin_user, :only => [:show, :index, :update, :destroy]
 
 	def new
 		@contact = Contact.new
 	end
 
 	def create
-		@contact = Contact.new(contact_params)
-		@contact.user_id = current_user.id
-		if @contact.save
-			redirect_to '/posts'
+		contact = Contact.new(contact_params)
+		contact.user_id = current_user.id
+		if contact.save
+			flash[:notice] = 'お問い合わせありがとうございます。承りました。'
+			redirect_to root_path
 		else
+			flash[:danger] = '件名 内容を入力してください。'
 			render :new
 		end
 	end
@@ -29,14 +31,15 @@ class ContactsController < ApplicationController
 		if @contact.update(contact_params)
 			ContactMailer.contact_mail(@contact).deliver_now
 			flash[:notice] = "返信しました。"
-			redirect_to '/contacts'
+			redirect_to contacts_path
 		end
 	end
 
 	def destroy
 		contact = Contact.find(params[:id])
 		contact.destroy
-		redirect_to '/contacts'
+	    flash[:notice] = '削除しました。'
+		redirect_to contacts_path
 	end
 
 
@@ -46,4 +49,3 @@ class ContactsController < ApplicationController
 		params.require(:contact).permit(:user_id, :title, :contact_content, :responce)
 	end
 end
-#binding.pry

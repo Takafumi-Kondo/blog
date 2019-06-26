@@ -32,6 +32,9 @@
 .new_content_image > img {
 	max-height: 170px;
 }
+.timeline_image > img {
+	max-height: 120px;
+}
 
 .section_title {
 	padding: 20px 0;
@@ -41,9 +44,10 @@
 	width: 90%;
 }
 
-.new_contents ~ nav.pagination {
+.new_contents ~ nav.pagination, .timeline_contents ~ nav.pagination {
 	display: none;
 }
+
 /*スクロール矢印*/
 .toppage {
 	position: fixed;

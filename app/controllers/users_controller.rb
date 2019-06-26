@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user!, only: [:edit, :update, :destroy]
+  before_action :admin_user, only: [:index]
 
   def show
     @user = User.find(params[:id])
@@ -28,6 +30,9 @@ class UsersController < ApplicationController
     else
       @user.posts.page(params[:page]).per(10).reverse_order
     end
+    if @user.id != current_user.id
+      redirect_to root_path
+    end
   end
 
   def update
@@ -43,13 +48,12 @@ class UsersController < ApplicationController
 
     @user = User.find(params[:id])
     @user.destroy
-=begin
     if current_user.admin?
-        redirect_to users_path
+      redirect_to users_path
     else
-        redirect_to root_path
+      flash[:notice] = '退会しました。ご利用ありがとうございました。'
+      redirect_to root_path
     end
-=end
   end
 
   def following
