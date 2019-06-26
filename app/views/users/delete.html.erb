@@ -1,0 +1,14 @@
+<div class ="container">
+	<div class="row">
+		<section class="col-xs-10 col-xs-offset-1">
+			<h1 class="page-header">退会する</h1>
+			<p>
+				退会処理を行うと、全てのデータが削除されます。<strong>この処理は取り消しできません。</strong>
+			</p>
+			<p>ユーザー名：<%= @user.name %></p>
+			<div class="text-right">
+				<%= link_to "退会", user_path(@user.id), class: 'btn btn-danger', method: :delete, "data-confirm" => "本当に退会しますか？" %>
+			</div>
+		</section>
+	</div>
+</div>

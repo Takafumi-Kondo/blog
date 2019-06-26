@@ -5,7 +5,7 @@
 <!-- 自身の記事一覧 -->
 			<%= render 'posts/list', posts: @posts %>
 		</section>
-<!-- 右バー ユーザー編集 -->
+<!-- バー ユーザー編集 -->
 		<section class="col-xs-3 text-center">
 			<%= form_for(@user) do |f| %>
 				<div class="row">
@@ -28,8 +28,8 @@
 				<br>
 				<%= f.submit "更新する" %>
 			<% end %>
-			<%#= link_to "パスワードの再設定はこちら", new_password_path(resource_name) %>
-			<%#= link_to "メールアドレス変更はこちら", confirmation_url(@resource, confirmation_token: @token) %>
+			<br>
+			<%= link_to "退会はこちら", delete_user_path(@user) %>
 		</section>
 	</div>
 </div>
