@@ -6,7 +6,6 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @genres_data = Post.joins(:genre).where(user_id: params[:id])
     @emotions_data = Post.joins(:emotion).where(user_id: params[:id])
-    @post_counts = Post.where(user_id: params[:id]).order(created_at: :ASC).group('date(created_at)').sum(:impressions_count)
     @new_posts = Post.page(params[:page]).where(user_id: params[:id]).per(10).reverse_order
     @post_pv_counts = Post.where(user_id: params[:id]).group(:impressions_count).order(impressions_count: "DESC").limit(5)
   #いいね数多い記事取得
@@ -62,6 +61,20 @@ class UsersController < ApplicationController
     else
       redirect_to root_path
     end
+  end
+
+  def timeline
+    @user = User.find(params[:id])
+    @users = @user.following.all
+    @timeline = Post.page(params[:page]).where(user_id: @users).per(10).order(created_at: :DESC)
+  end
+
+  def report
+    user = User.find(params[:id])
+    @total_pv = Post.where(user_id: user).sum(:impressions_count)
+    @pv_counts = Post.where(user_id: user, created_at: 3.weeks.ago..Time.now).group('date(created_at)').sum(:impressions_count)
+    @genres_data = Post.joins(:genre).where(user_id: user)
+    @emotions_data = Post.joins(:emotion).where(user_id: user)
   end
 
   def following

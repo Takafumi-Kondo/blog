@@ -76,12 +76,6 @@ class PostsController < ApplicationController
     end
   end
 
-  def timeline
-    @user = current_user
-    @users = @user.following.all
-    @timeline = Post.page(params[:page]).where(user_id: @users).per(10).order(created_at: :DESC)
-  end
-
   def top
     @posts_pv_count = Post.page(params[:page]).group(:impressions_count).order(impressions_count: :DESC).limit(5)
 # ジャンル別人気欄

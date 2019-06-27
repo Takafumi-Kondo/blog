@@ -3,7 +3,6 @@ Rails.application.routes.draw do
   root to: 'posts#top'
   get '/about' => 'static_pages#about'
   get 'posts/admin' => 'posts#admin'
-  get 'timeline' => 'posts#timeline'
   get 'top' => 'posts#top'
 
   devise_for :users
@@ -16,6 +15,8 @@ Rails.application.routes.draw do
     member do
       get :following, :followers
       get :delete
+      get :report
+      get :timeline
     end
   end
 

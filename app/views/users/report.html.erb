@@ -1,0 +1,19 @@
+<div class="container-fluid">
+	<section>
+		<h3 class="page-header">アクセス数</h3>
+		<p>合計:<%= @total_pv %></p>
+		<%= line_chart @pv_counts %>
+	</section>
+	<br>
+	<section>
+		<h3 class="page-header">投稿傾向</h3>
+		<div class="row">
+			<div class="col-xs-6">
+				<%= pie_chart @genres_data.group(:genre_name).count %>
+			</div>
+			<div class="col-xs-6">
+				<%= pie_chart @emotions_data.group(:emotion_name).count %>
+			</div>
+		</div>
+	</section>
+</div>
