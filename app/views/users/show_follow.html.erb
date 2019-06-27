@@ -1,23 +1,23 @@
 <div class="container">
-	<div class="row">
-		<section>
-			<h3><%= @user.name %>さんのフォロー</h3>
-			<table class="table">
-				<% @users.each do |user| %>
-				<tr>
-					<td>
-						<%= attachment_image_tag user, :profile_image, format: 'jpeg', fallback: 'no_image.jpg', class: 'profile-img' %>
-					</td>
-					<td>
-						<%= link_to user_path(user.id), :style=> 'text-decoration: none;' do %>
-							<%= user.name %>
-						<% end %>
-					</td>
-					<td><%= user.introduction %></td>
-				</tr>
-				<% end %>
-			</table>
-			<%= paginate @users %>
-		</section>
-	</div>
+  <div class="row">
+    <section>
+      <h3><%= @user.name %>さんのフォロー</h3>
+      <table class="table">
+        <% @users.each do |user| %>
+          <tr>
+            <td>
+              <%= attachment_image_tag user, :profile_image, format: 'jpeg', fallback: 'no_image.jpg', class: 'profile-img' %>
+            </td>
+            <td>
+              <%= link_to user_path(user.id), :style=> 'text-decoration: none;' do %>
+                <%= user.name %>
+              <% end %>
+            </td>
+            <td><%= user.introduction %></td>
+          </tr>
+        <% end %>
+      </table>
+      <%= paginate @users %>
+    </section>
+  </div>
 </div>

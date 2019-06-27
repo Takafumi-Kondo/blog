@@ -1,31 +1,30 @@
 <section>
-	<h4 class="text-center"><%= post.comments.count %>件コメント</h4>
-	<ol>
-		<div class="row">
-			<% post.comments.each do |comment| %>
-				<li class="col-xs-10 col-xs-offset-1">
-					<div class="row">
-						<div class="col-xs-1">
-							<%= attachment_image_tag comment.user, :profile_image, format: 'jpeg', size: '35x35', fallback: "no_image.jpg" %>
-						</div>
-						<div class="col-xs-11">
-							<%= link_to user_path(comment.user.id) do %>
-								<%= comment.user.name %>&nbsp;
-							<% end %>
-							<%= comment.created_at.strftime('%Y/%m/%d') %><br>
-							<%= comment.comment %>
-						</div>
-					</div>
-				</li>
-			<% end %>
-		</div>
-	</ol>
-	<!-- コメント送信フォーム -->
-	<% if user_signed_in? %>
-		<%= form_for [post, comment] do |f| %>
-			<%= f.text_area :comment, rows:'3', placeholder: "コメント", class: 'form-control' %>
-			<%= f.submit "コメントを送信", class: 'btn btn-default' %>
-		<% end %>
-	<% end %>
+  <h4 class="text-center"><%= post.comments.count %>件コメント</h4>
+  <ol>
+    <div class="row">
+      <% post.comments.each do |comment| %>
+        <li class="col-xs-10 col-xs-offset-1">
+          <div class="row">
+            <div class="col-xs-1">
+              <%= attachment_image_tag comment.user, :profile_image, format: 'jpeg', size: '35x35', fallback: "no_image.jpg" %>
+            </div>
+            <div class="col-xs-11">
+              <%= link_to user_path(comment.user.id) do %>
+                <%= comment.user.name %>&nbsp;
+              <% end %>
+              <%= comment.created_at.strftime('%Y/%m/%d') %><br>
+              <%= comment.comment %>
+            </div>
+          </div>
+        </li>
+      <% end %>
+    </div>
+  </ol>
+  <!-- コメント送信フォーム -->
+  <% if user_signed_in? %>
+    <%= form_for [post, comment] do |f| %>
+      <%= f.text_area :comment, rows:'3', placeholder: "コメント", class: 'form-control' %>
+      <%= f.submit "コメントを送信", class: 'btn btn-default' %>
+    <% end %>
+  <% end %>
 </section>
-<%#= render 'posts/comment', post: @post, comment: @comment %>

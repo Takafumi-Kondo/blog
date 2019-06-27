@@ -1,41 +1,41 @@
 <section class="container">
-    <div class="row">
-        <div class="col-xs-3">
-            <h1>ジャンル一覧</h1>
-        </div>
-        <div class="col-xs-3 col-xs-offset-6">
-            <%= form_for(@genre) do |f| %>
-                <br>
-                <%= f.text_field :genre_name, required: true, class: 'form-conntrol' %>
-                    <%= f.submit "新規登録", class: 'btn btn-default' %>
-            <% end %>
-        </div>
+  <div class="row">
+    <div class="col-xs-3">
+      <h1>ジャンル一覧</h1>
     </div>
-    <div class="row">
-        <table class="table table-hover">
-            <thead>
-                <tr class="info">
-                    <th>ID</th>
-                    <th>ジャンル名</th>
-                    <th>編集</th>
-                    <th></th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-            <% @genres.each do |genre| %>
-            <%= form_for(genre) do |f| %>
-                <tr class="active">
-                    <td><%= genre.id %></td>
-                    <td><%= genre.genre_name %></td>
-                    <td><%=  f.text_field :genre_name, class: 'form_control' %></td>
-                    <td><%= f.submit "更新", class: 'btn btn-default' %></td>
-                    <td><%= link_to '削除', genre_path(genre.id), method: :delete, "data-confirm" => "削除しますか？", class: 'btn-sm' %></td>
-                </tr>
-            <% end %>
-            <% end %>
-            </tbody>
-        </table>
-        <%= paginate @genres %>
+    <div class="col-xs-3 col-xs-offset-6">
+      <%= form_for(@genre) do |f| %>
+        <br>
+        <%= f.text_field :genre_name, required: true, class: 'form-conntrol' %>
+        <%= f.submit "新規登録", class: 'btn btn-default' %>
+      <% end %>
     </div>
+  </div>
+  <div class="row">
+    <table class="table table-hover">
+      <thead>
+        <tr class="info">
+          <th>ID</th>
+          <th>ジャンル名</th>
+          <th>編集</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+      <% @genres.each do |genre| %>
+        <%= form_for(genre) do |f| %>
+          <tr class="active">
+            <td><%= genre.id %></td>
+            <td><%= genre.genre_name %></td>
+            <td><%=  f.text_field :genre_name, class: 'form_control' %></td>
+            <td><%= f.submit "更新", class: 'btn btn-default' %></td>
+            <td><%= link_to '削除', genre_path(genre.id), method: :delete, "data-confirm" => "削除しますか？", class: 'btn-sm' %></td>
+          </tr>
+        <% end %>
+      <% end %>
+      </tbody>
+    </table>
+    <%= paginate @genres %>
+  </div>
 </section>
