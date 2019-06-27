@@ -1,49 +1,38 @@
 <section class="container">
-	<div class="row">
-		<div class="">
-			<%= link_to users_path do %>
-				<h2>ユーザー一覧</h2>
-			<% end %>
-		</div>
+  <%= link_to users_path do %>
+    <h2>ユーザー一覧</h2>
+  <% end %>
 <!-- 検索フォーム -->
-		<div class="">
-			<%= form_tag(users_path, :method => 'get' ) do %><%# 指定しないとpost,tagはDB変更しないとき%>
-				<%= text_field_tag :search %>
-				<%= submit_tag "検索", :name => nil %><%#urlを消してる%>
-			<% end %>
-		</div>
-	</div>
+  <%= form_tag(users_path, :method => 'get' ) do %><%# 指定しないとpost,tagはDB変更しないとき%>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "検索", class: 'btn btn-default', :name => nil %><%#urlを消してる%>
+  <% end %>
 
-	<% if @users.count == 0 %>
-	<% else %>
-		<div class="row">
-			<div class="">
-				<table class="table">
-					<thead>
-						<tr class="info">
-							<th width="3%">ID</th>
-							<th width="10%">ユーザー名</th>
-							<th>紹介文</th>
-							<th width="15%">メール</th>
-							<th width="5%"></th>
-							<th width="6%"></th>
-						</tr>
-					</thead>
-					<tbody>
-					<% @users.each do |user| %>
-						<tr class="active">
-							<td><%= user.id %></td>
-							<td><%= user.name %></td>
-							<td><%= user.introduction %></td>
-							<td><%= user.email %></td>
-							<td><%= link_to "詳細", user_path(user.id) %></td>
-							<td><%= link_to "削除", user_path(user.id), method: :delete, "data-confirm" => "削除しますか？", class: 'btn-sm' %></td>
-						</tr>
-					<% end %>
-					</tbody>
-				</table>
-				<%= paginate @users %>
-			</div>
-		</div>
-	<% end %>
+  <% if @users.count == 0 %>
+  <% else %>
+    <table class="table">
+    <thead>
+      <tr class="info">
+        <th width="3%">ID</th>
+        <th width="10%">ユーザー名</th>
+        <th>紹介文</th>
+        <th width="15%">メール</th>
+        <th width="5%"></th>
+        <th width="6%"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr class="active">
+          <td><%= user.id %></td>
+          <td><%= user.name %></td>
+          <td><%= user.introduction %></td>
+          <td><%= user.email %></td>
+          <td><%= link_to "詳細", user_path(user.id) %></td>
+          <td><%= link_to "削除", delete_user_path(user) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+    </table>
+  <% end %>
 </section>

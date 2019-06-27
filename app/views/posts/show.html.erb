@@ -1,60 +1,62 @@
 <section>
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-xs-8 col-xs-offset-1 post_show">
-				<div class="row">
-					<div class="col-xs-10 col-xs-offset-1">
-						<h2><%= @post.title %></h2>
-						<p><%= @post.genre.genre_name %></p>
-						<p class="posted_date">投稿日:<%= @post.created_at.strftime("%Y-%m-%d %H:%M") %></p>
-						<div class="post-image">
-							<%= attachment_image_tag @post, :post_headerimage, format: 'jpeg', fallback: 'no_image.jpg', class: 'post_headerimage' %>
-						</div>
-					</div>
-				</div>
-				<div>
-					<%= markdown(@post.body).html_safe %>
-				</div>
-				<p class="text-right"><%= @post.emotion.emotion_name %></p>
-				<br>
-		<!-- いいね欄 favorited_by?はmodelに定義したもの-->
-				<% if user_signed_in? %>
-					<% if @post.favorited_by?(current_user) %>
-						<%= link_to post_favorites_path(@post), :style=> 'text-decoration: none;', method: :delete do %>
-							<i class="fa fa-heart" style="color: red;"></i>
-						<% end %>
-						<%= @post.favorites.count %>
-					<% else %>
-						<%= link_to post_favorites_path(@post), :style=> 'text-decoration: none;', method: :post do %>
-							<i class="far fa-heart"></i>
-						<% end %>
-						<%= @post.favorites.count %>
-					<% end %>
-				<% else %>
-					<i class="far fa-heart"></i>
-					<%= @post.favorites.count %>
-				<% end %>
-		<!-- コメント欄 -->
-				<%= render 'posts/comments', post: @post, comment: @comment %>
-				<%= number_with_delimiter(@page_views) %>
-			</div>
-		<!-- サイドバー -->
-			<div class="col-xs-2 text-center">
-				<%= render 'users/side', user: @user %>
-				<br>
-				<br>
-				<h4 class="panel panel-default section_title">人気記事ランキング</h4>
-				<% @popular_posts.each do |post| %>
-					<div class="row popular_post">
-						<div class="col-xs-6 col-xs-offset-1">
-							<%= attachment_image_tag post, :post_headerimage, format: 'jpeg', fallback: 'no_image.jpg', class: 'post_headerimage' %>
-						</div>
-						<%= link_to post_path(post.id), :style=> 'text-decoration: none;' do %>
-							<p class="text-left"><%= post.title.truncate(30) %></p>
-						<% end %>
-					</div>
-				<% end %>
-			</div>
-		</div>
-	</div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-8 col-xs-offset-1 post_show">
+        <div class="row">
+          <div class="col-xs-10 col-xs-offset-1">
+            <h2><%= @post.title %></h2>
+            <p><%= @post.genre.genre_name %></p>
+            <p class="posted_date">投稿日:<%= @post.created_at.strftime("%Y-%m-%d %H:%M") %></p>
+            <div class="row">
+              <div class="col-xs-6 col-xs-offset-3 post-image">
+                <%= attachment_image_tag @post, :post_headerimage, format: 'jpeg', fallback: 'no_image.jpg', class: 'post_headerimage' %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <%= markdown(@post.body).html_safe %>
+        </div>
+        <p class="text-right"><%= @post.emotion.emotion_name %></p>
+        <br>
+      <!-- いいね欄 favorited_by?はmodelに定義したもの-->
+        <% if user_signed_in? %>
+          <% if @post.favorited_by?(current_user) %>
+            <%= link_to post_favorites_path(@post), :style=> 'text-decoration: none;', method: :delete do %>
+              <i class="fa fa-heart" style="color: red;"></i>
+            <% end %>
+            <%= @post.favorites.count %>
+          <% else %>
+            <%= link_to post_favorites_path(@post), :style=> 'text-decoration: none;', method: :post do %>
+              <i class="far fa-heart"></i>
+            <% end %>
+            <%= @post.favorites.count %>
+          <% end %>
+        <% else %>
+          <i class="far fa-heart"></i>
+          <%= @post.favorites.count %>
+        <% end %>
+      <!-- コメント欄 -->
+        <%= render 'posts/comments', post: @post, comment: @comment %>
+        <%= number_with_delimiter(@page_views) %>
+      </div>
+      <!-- サイドバー -->
+      <div class="col-xs-2 text-center">
+        <%= render 'users/side', user: @user %>
+        <br>
+        <br>
+        <h4 class="panel panel-default section_title">人気記事ランキング</h4>
+        <% @popular_posts.each do |post| %>
+          <div class="row popular_post">
+            <div class="col-xs-6 col-xs-offset-1">
+              <%= attachment_image_tag post, :post_headerimage, format: 'jpeg', fallback: 'no_image.jpg', class: 'post_headerimage' %>
+            </div>
+            <%= link_to post_path(post.id), :style=> 'text-decoration: none;' do %>
+              <p class="text-left"><%= post.title.truncate(30) %></p>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </section>

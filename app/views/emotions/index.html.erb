@@ -1,41 +1,41 @@
 <section class="container">
-	<div class="row">
-		<div class="col-xs-3">
-            <h1>気分一覧</h1>
-        </div>
-        <div class="col-xs-3 col-xs-offset-6">
-            <%= form_for(@emotion) do |f| %>
-                <br>
-                <%= f.text_field :emotion_name, required: true, class: 'form-conntrol' %>
-                    <%= f.submit "新規登録", class: 'btn btn-default' %>
-            <% end %>
-        </div>
+  <div class="row">
+    <div class="col-xs-3">
+      <h1>気分一覧</h1>
     </div>
-    <div class="row">
-        <table class="table table-hover">
-            <thead>
-                <tr class="info">
-                    <th>ID</th>
-                    <th>気分名</th>
-                    <th>編集</th>
-                    <th></th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-            <% @emotions.each do |emotion| %>
-            <%= form_for(emotion) do |f| %>
-                <tr class="active">
-                    <td><%= emotion.id %></td>
-                    <td><%= emotion.emotion_name %></td>
-                    <td><%=  f.text_field :emotion_name, class: 'form_control' %></td>
-                    <td><%= f.submit "更新", class: 'btn btn-default' %></td>
-                    <td><%= link_to '削除', emotion_path(emotion.id), method: :delete, "data-confirm" => "削除しますか？", class: 'btn-sm' %></td>
-                </tr>
-            <% end %>
-            <% end %>
-            </tbody>
-        </table>
-        <%= paginate @emotions %>
+    <div class="col-xs-3 col-xs-offset-6">
+      <%= form_for(@emotion) do |f| %>
+        <br>
+        <%= f.text_field :emotion_name, required: true, class: 'form-conntrol' %>
+        <%= f.submit "新規登録", class: 'btn btn-default' %>
+      <% end %>
     </div>
+  </div>
+  <div class="row">
+    <table class="table table-hover">
+      <thead>
+        <tr class="info">
+          <th>ID</th>
+          <th>気分名</th>
+          <th>編集</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+      <% @emotions.each do |emotion| %>
+        <%= form_for(emotion) do |f| %>
+            <tr class="active">
+                <td><%= emotion.id %></td>
+                <td><%= emotion.emotion_name %></td>
+                <td><%=  f.text_field :emotion_name, class: 'form_control' %></td>
+                <td><%= f.submit "更新", class: 'btn btn-default' %></td>
+                <td><%= link_to '削除', emotion_path(emotion.id), method: :delete, "data-confirm" => "削除しますか？", class: 'btn-sm' %></td>
+            </tr>
+        <% end %>
+      <% end %>
+      </tbody>
+    </table>
+    <%= paginate @emotions %>
+  </div>
 </section>

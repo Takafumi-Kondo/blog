@@ -1,12 +1,11 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!, only: [:edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:show]
   before_action :admin_user, only: [:index]
 
   def show
     @user = User.find(params[:id])
     @genres_data = Post.joins(:genre).where(user_id: params[:id])
     @emotions_data = Post.joins(:emotion).where(user_id: params[:id])
-    @post_counts = Post.where(user_id: params[:id]).order(created_at: :ASC).group('date(created_at)').sum(:impressions_count)
     @new_posts = Post.page(params[:page]).where(user_id: params[:id]).per(10).reverse_order
     @post_pv_counts = Post.where(user_id: params[:id]).group(:impressions_count).order(impressions_count: "DESC").limit(5)
   #いいね数多い記事取得
@@ -45,15 +44,37 @@ class UsersController < ApplicationController
   end
 
   def destroy
-
-    @user = User.find(params[:id])
-    @user.destroy
+    user = User.find(params[:id])
+    user.destroy
     if current_user.admin?
       redirect_to users_path
     else
       flash[:notice] = '退会しました。ご利用ありがとうございました。'
       redirect_to root_path
     end
+  end
+
+  def delete
+    @user = User.find(params[:id])
+    if @user.id == current_user.id
+    elsif current_user.admin?
+    else
+      redirect_to root_path
+    end
+  end
+
+  def timeline
+    @user = User.find(params[:id])
+    @users = @user.following.all
+    @timeline = Post.page(params[:page]).where(user_id: @users).per(10).order(created_at: :DESC)
+  end
+
+  def report
+    user = User.find(params[:id])
+    @total_pv = Post.where(user_id: user).sum(:impressions_count)
+    @pv_counts = Post.where(user_id: user, created_at: 3.weeks.ago..Time.now).group('date(created_at)').sum(:impressions_count)
+    @genres_data = Post.joins(:genre).where(user_id: user)
+    @emotions_data = Post.joins(:emotion).where(user_id: user)
   end
 
   def following

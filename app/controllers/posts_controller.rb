@@ -5,6 +5,7 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
+    @post.postimages.build
   end
 
   def create
@@ -74,12 +75,6 @@ class PostsController < ApplicationController
       flash[:notice] = "削除しました。"
       redirect_to edit_user_path(user)
     end
-  end
-
-  def timeline
-    @user = current_user
-    @users = @user.following.all
-    @timeline = Post.page(params[:page]).where(user_id: @users).per(10).order(created_at: :DESC)
   end
 
   def top

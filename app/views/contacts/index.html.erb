@@ -1,48 +1,47 @@
 <div class="container">
-    <div class="row">
-        <section>
-            <h2>問い合わせ一覧</h2>
-            <table class="table table-hover">
-                <thead>
-                    <tr class="info">
-                        <th width="8%">日時</th>
-                        <th width="6%">ユーザーID</th>
-                        <th width="8%">ユーザー名</th>
-                        <th>件名</th>
-                        <th width="50%">内容</th>
-                        <th></th>
-                        <th width="5%"></th>
-                        <th width="5%"></th>
-                    </tr>
-                </thead>
-                <% @contacts.each do |contact| %>
-                <tbody>
-                    <tr class="active">
-                        <td><%= contact.created_at.strftime("%Y-%m-%d %H:%M") %></td>
-                        <td><%= contact.user.id %></td>
-                        <td><%= contact.user.name %></td>
-                        <td><%= contact.title %></td>
-                        <td><%= contact.contact_content.truncate(200) %></td>
-                        <td>
-                        <!-- 返信確認チェックマーク -->
-                            <% if contact.responce == nil %>
-                              <i class="fas fa-info-circle my-orange"></i>
-                            <% else %>
-                              <i class="fas fa-check my-green"></i>
-                            <% end %>
-                        </td>
-                        <td>
-                            <%= link_to "詳細", contact_path(contact.id) %>
-
-                        </td>
-                        <td>
-                            <%= link_to "削除", contact_path(contact.id), method: :delete, "data-confirm" => "削除しますか？", class: '' %>
-                        </td>
-                    </tr>
-                </tbody>
+  <div class="row">
+    <section>
+      <h2>問い合わせ一覧</h2>
+        <table class="table table-hover">
+          <thead>
+            <tr class="info">
+              <th width="8%">日時</th>
+              <th width="6%">ユーザーID</th>
+              <th width="8%">ユーザー名</th>
+              <th>件名</th>
+              <th width="50%">内容</th>
+              <th></th>
+              <th width="5%"></th>
+              <th width="5%"></th>
+            </tr>
+          </thead>
+          <% @contacts.each do |contact| %>
+          <tbody>
+            <tr class="active">
+              <td><%= contact.created_at.strftime("%Y-%m-%d %H:%M") %></td>
+              <td><%= contact.user.id %></td>
+              <td><%= contact.user.name %></td>
+              <td><%= contact.title %></td>
+              <td><%= contact.contact_content.truncate(200) %></td>
+              <!-- 返信確認チェックマーク -->
+              <td>
+                <% if contact.responce == nil %>
+                  <i class="fas fa-info-circle my-orange"></i>
+                <% else %>
+                  <i class="fas fa-check my-green"></i>
                 <% end %>
-            </table>
-            <%= paginate @contacts %>
-        </section>
-    </div>
+              </td>
+              <td>
+                <%= link_to "詳細", contact_path(contact.id) %>
+              </td>
+              <td>
+                <%= link_to "削除", contact_path(contact.id), method: :delete, "data-confirm" => "削除しますか？", class: '' %>
+              </td>
+            </tr>
+          </tbody>
+          <% end %>
+        </table>
+      <%= paginate @contacts %>
+    </section>
+  </div>
 </div>

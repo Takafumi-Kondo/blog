@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row">
         <section class="col-xs-10 col-xs-offset-1">
-        	<h2>問い合わせ詳細</h2>
+          <h2>問い合わせ詳細</h2>
             <ul class="">
                 <li>
                     <p>投稿日時: <%= @contact.created_at.strftime("%Y-%m-%d %H:%M") %></p>
@@ -36,11 +36,11 @@
     <br>
     <div class="row pb-50">
         <section class="col-xs-10 col-xs-offset-1">
-        	<h3>返信フォーム</h3>
-        	<%= form_for [@user, @contact] do |f| %>
-        		<%= f.text_area :responce, autofocus: true, required: true, size: '132x10' %><br>
-        		<%= f.submit "返信", class: 'btn btn-default' %>
-        	<% end %>
-    	</section>
-	</div>
+          <h3>返信フォーム</h3>
+          <%= form_for [@user, @contact] do |f| %>
+            <%= f.text_area :responce, autofocus: true, required: true, size: '132x10' %><br>
+            <%= f.submit "返信", class: 'btn btn-default' %>
+          <% end %>
+      </section>
+  </div>
 </div>

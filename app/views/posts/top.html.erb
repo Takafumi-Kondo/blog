@@ -1,151 +1,95 @@
 <div class="container-fluid top">
-	<div class="top_contents">
-		<% @posts_pv_count.each do |post| %>
-			<div class="item">
-				<%= attachment_image_tag post, :post_headerimage, format: 'jpeg', fallback: 'no_image.jpg' %>
-				<%= link_to post_path(post.id), :style=> 'text-decoration: none;' do %>
-					<h4><%= post.title.truncate(40) %></h4>
-				<% end %>
-				<p><%= post.genre.genre_name %></p>
-				<%= link_to user_path(post.user.id), :style=> 'text-decoration: none;' do %>
-					<p class="text-right"><%= post.user.name %></p>
-				<% end %>
-			</div>
-		<% end %>
-	</div>
+  <div class="top_contents">
+    <% @posts_pv_count.each do |post| %>
+      <div class="item">
+        <%= attachment_image_tag post, :post_headerimage, format: 'jpeg', fallback: 'no_image.jpg' %>
+        <%= link_to post_path(post.id), :style=> 'text-decoration: none;' do %>
+          <h4 style="color: black;"><%= post.title.truncate(40) %></h4>
+        <% end %>
+        <p><%= post.genre.genre_name %></p>
+        <%= link_to user_path(post.user.id), :style=> 'text-decoration: none;' do %>
+          <p class="text-right" style="color: black;"><%= post.user.name %></p>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
 </div>
 <!-- ジャンル -->
 <div class="container">
-	<div class="row">
-		<section class="genres">
-			<h3 class="col-xs-12 page-header">ジャンル</h3>
-			<div class="col-xs-4">
-				<h3 class="col-xs-offset-1 panel panel-default">
-					<% @genre_popular_posts.first(1).each do |post| %>
-						<%= post.genre.genre_name %>
-					<% end %>
-				</h3>
-				<% @genre_popular_posts.each do |post| %>
-					<div class="row genre_contents">
-						<div class="col-xs-4 col-xs-offset-1 genre_content_image">
-							<%= attachment_image_tag post, :post_headerimage, format: 'jpeg', fallback: 'no_image.jpg' %>
-						</div>
-						<%= link_to post_path(post.id), :style=> 'text-decoration: none;' do %>
-							<h4><%= post.title.truncate(25) %></h4>
-						<% end %>
-						<%= link_to user_path(post.user.id), :style=> 'text-decoration: none;' do %>
-							<p class="text-right"><%= post.user.name %></p>
-						<% end %>
-					</div>
-				<% end %>
-			</div>
-			<div class="col-xs-4">
-				<h3 class="col-xs-offset-1 panel panel-default">
-					<% @genre_popular_posts2.first(1).each do |post| %>
-						<%= post.genre.genre_name %>
-					<% end %>
-				</h3>
-				<% @genre_popular_posts2.each do |post| %>
-					<div class="row genre_contents">
-						<div class="col-xs-4 col-xs-offset-1 genre_content_image">
-							<%= attachment_image_tag post, :post_headerimage, format: 'jpeg', fallback: 'no_image.jpg' %>
-						</div>
-						<%= link_to post_path(post.id), :style=> 'text-decoration: none;' do %>
-							<h4><%= post.title.truncate(34) %></h4>
-						<% end %>
-						<%= link_to user_path(post.user.id), :style=> 'text-decoration: none;' do %>
-							<p class="text-right"><%= post.user.name %></p>
-						<% end %>
-					</div>
-				<% end %>
-			</div>
-			<div class="col-xs-4">
-				<h3 class="col-xs-offset-1 panel panel-default">
-					<% @genre_popular_posts3.first(1).each do |post| %>
-						<%= post.genre.genre_name %>
-					<% end %>
-				</h3>
-				<% @genre_popular_posts3.each do |post| %>
-					<div class="row genre_contents">
-						<div class="col-xs-4 col-xs-offset-1 genre_content_image">
-							<%= attachment_image_tag post, :post_headerimage, format: 'jpeg', fallback: 'no_image.jpg' %>
-						</div>
-						<%= link_to post_path(post.id), :style=> 'text-decoration: none;' do %>
-							<h4><%= post.title.truncate(34) %></h4>
-						<% end %>
-						<%= link_to user_path(post.user.id), :style=> 'text-decoration: none;' do %>
-							<p class="text-right"><%= post.user.name %></p>
-						<% end %>
-					</div>
-				<% end %>
-			</div>
-		</section>
-	</div>
+  <div class="row">
+    <section class="genres">
+      <h3 class="col-xs-12 page-header">ジャンル</h3>
+      <%= render 'posts/genres', genre_popular_posts: @genre_popular_posts,
+                                 genre_popular_posts2: @genre_popular_posts2,
+                                 genre_popular_posts3: @genre_popular_posts3 %>
+    </section>
+  </div>
 <!-- おすすめ記事 -->
-	<div class="row">
-		<section class="col-xs-7 popular_posts">
-			<h3 class="panel panel-default section_title">おすすめ記事</h3>
-			<div class="row row-eq-height">
-				<% @popular_posts.each do |post| %>
-					<div class="col-xs-6 popular_contents">
-						<div class="row">
-							<div class="col-xs-6">
-								<%= attachment_image_tag post, :post_headerimage, format: 'jpeg', fallback: 'no_image.jpg', class: 'post_headerimage' %>
-							</div>
-							<%= link_to post_path(post.id), :style=> 'text-decoration: none;' do %>
-								<h4><%= post.title.truncate(20) %></h4>
-							<% end %>
-							<%= link_to user_path(post.user.id), :style=> 'text-decoration: none;' do %>
-								<p class="text-right"><%= post.user.name %></p>
-							<% end %>
-						</div>
-					</div>
-				<% end %>
-			</div>
-		</section>
-	<!-- おすすめユーザー -->
-		<section class=" col-xs-4 col-xs-offset-1 popular_users">
-			<h3 class="panel panel-default section_title">おすすめのユーザー</h3>
-			<% @popular_users.each do |user| %>
-				<div class="row user_contents">
-					<div class="col-xs-4 col-xs-offset-1">
-						<%= attachment_image_tag user, :profile_image, format: 'jpeg', fallback: 'no_image.jpg', size: '60x90', class: 'profile_image' %>
-					</div>
-					<%= link_to user_path(user.id), :style=> 'text-decoration: none;' do %>
-						<p><%= user.name %></p>
-						<p><%= user.introduction.truncate(25) %></p>
-					<% end %>
-				</div>
-			<% end %>
-		</section>
-	</div>
+  <div class="row">
+    <section class="col-xs-7 popular_posts">
+      <h3 class="page-header">おすすめ記事</h3>
+      <div class="row row-eq-height">
+        <% @popular_posts.each do |post| %>
+          <div class="col-xs-6 popular_contents">
+            <div class="row">
+              <div class="col-xs-6">
+                <%= attachment_image_tag post, :post_headerimage, format: 'jpeg', fallback: 'no_image.jpg', class: 'post_headerimage' %>
+              </div>
+              <%= link_to post_path(post.id), :style=> 'text-decoration: none;' do %>
+                <h4 style="color: black;"><%= post.title.truncate(20) %></h4>
+              <% end %>
+              <p><%= post.genre.genre_name %></p>
+              <%= link_to user_path(post.user.id), :style=> 'text-decoration: none;' do %>
+                <p class="text-right" style="color: black;"><%= post.user.name %></p>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </section>
+  <!-- おすすめユーザー -->
+    <section class=" col-xs-4 col-xs-offset-1 popular_users">
+      <h3 class="page-header">おすすめのユーザー</h3>
+      <% @popular_users.each do |user| %>
+        <div class="row user_contents">
+          <div class="col-xs-4">
+            <%= attachment_image_tag user, :profile_image, format: 'jpeg', fallback: 'no_image.jpg', size: '60x90', class: 'profile_image' %>
+          </div>
+          <%= link_to user_path(user.id), :style=> 'text-decoration: none;' do %>
+            <p style="color: black;"><%= user.name %></p>
+            <p style="color: black;"><%= user.introduction.truncate(25) %></p>
+          <% end %>
+        </div>
+      <% end %>
+    </section>
+  </div>
 <!-- 新着記事 -->
-	<div class="row">
-		<section class="new-posts">
-			<h3 class="panel panel-default section_title">新着記事</h3>
-			<div class="jscroll">
-				<% @posts.each do |post| %>
-					<div class="col-xs-4 new_contents">
-						<div class="row">
-							<div class="col-xs-6 new_content_image">
-								<%= attachment_image_tag post, :post_headerimage, format: 'jpeg', fallback: 'no_image.jpg', class: 'post_headerimage' %>
-							</div>
-							<%= link_to post_path(post.id), :style=> 'text-decoration: none;' do %>
-								<h4><%= post.title.truncate(30) %></h4>
-							<% end %>
-							<p><%= post.genre.genre_name %></p>
-							<br>
-							<%= link_to user_path(post.user.id), :style=> 'text-decoration: none;' do %>
-								<p class="text-right"><%= post.user.name %></p>
-							<% end %>
-						</div>
-					</div>
-				<% end %>
-				<%= paginate @posts %>
-			</div>
-		</section>
-	</div>
-	<div class="toppage">
-		<i class="fas fa-arrow-circle-up fa-3x"></i>
-	</div>
+  <div class="row">
+    <section class="new-posts">
+      <h3 class="page-header">新着記事</h3>
+      <div class="jscroll">
+        <% @posts.each do |post| %>
+          <div class="col-xs-4 new_contents">
+            <div class="row">
+              <div class="col-xs-6 new_content_image">
+                <%= attachment_image_tag post, :post_headerimage, format: 'jpeg', fallback: 'no_image.jpg', class: 'post_headerimage' %>
+              </div>
+              <%= link_to post_path(post.id), :style=> 'text-decoration: none;' do %>
+                <h4 style="color: black;"><%= post.title.truncate(30) %></h4>
+              <% end %>
+              <p><%= post.genre.genre_name %></p>
+              <br>
+              <%= link_to user_path(post.user.id), :style=> 'text-decoration: none;' do %>
+                <p class="text-right" style="color: black;"><%= post.user.name %></p>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+        <%= paginate @posts %>
+      </div>
+    </section>
+  </div>
+  <div class="toppage">
+    <i class="fas fa-arrow-circle-up fa-3x"></i>
+  </div>
 </div>

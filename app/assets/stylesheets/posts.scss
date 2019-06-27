@@ -11,18 +11,33 @@
 }
 
 .post-image img {
-  object-fit: cover;
-  display: block;
-  width: 90%;
   margin: 0 auto;
-  max-height: 400px;
+  max-height: 350px;
 }
 .post_headerimage {
 	width: 100%;
 	max-height: 180px;
 }
 
-.genre_contents, .user_contents, .popular_contents, .new_contents {
+.genre_contents, .popular_contents, .user_contents, .new_contents {
+	margin-bottom: 40px;
+	border-radius: 5px;
+	box-shadow: 0px 5px 10px #ecf0f3;;
+}
+.genre_contents:hover, .popular_contents:hover, .user_contents:hover, .new_contents:hover {
+	transform: scale(1.02);
+	background-color: #ecf0f3;
+	box-shadow: 0 1px 5px #999;
+	transition-duration: 0.5s;/*掛ける時間*/
+}
+
+
+.genre_contents, .user_contents, .popular_contents {
+	margin-bottom: 20px;
+}
+
+.new_contents {
+	height: 165px;
 	margin-bottom: 20px;
 }
 
