@@ -26,10 +26,15 @@
             <p>紹介文</p>
             <%= f.text_area :introduction, size: '30x10', value: "自己紹介欄" %>
             <br>
+            <p>メール</p>
+            <%= f.text_field :email %>
+            <br>
+            <br>
             <%= f.submit "更新する" %>
       <% end %>
-          <br>
-          <%= link_to "退会はこちら", delete_user_path(@user) %>
+          <div class="delete_user">
+            <%= link_to "退会はこちら", delete_user_path(@user) %>
+          </div>
     </section>
   </div>
 </div>

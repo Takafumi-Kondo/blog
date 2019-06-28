@@ -20,14 +20,17 @@
   </head>
 
   <body>
+    <header>
+      <div class="headerimage">
+        <%= attachment_image_tag @user, :profile_headerimage, format: 'jpeg', width: '150', height: '200', class: 'profile_headerimage' %>
+      </div>
+      <%=  render 'layouts/header' %>
+    </header>
     <div class="wrap">
-      <header>
-        <div class="headerimage">
-          <%= attachment_image_tag @user, :profile_headerimage, format: 'jpeg', width: '150', height: '200', class: 'profile_headerimage' %>
-        </div>
-        <%=  render 'layouts/header' %>
-      </header>
-    <%= yield %>
-  </div>
+      <%= yield %>
+    </div>
+    <footer>
+      <p>©︎2019 Arche</p>
+    </footer>
   </body>
 </html>

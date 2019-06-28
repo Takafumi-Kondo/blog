@@ -96,4 +96,3 @@ class UsersController < ApplicationController
     params.require(:user).permit(:name, :email, :profile_headerimage, :profile_image, :introduction)
   end
 end
-#binding.pry

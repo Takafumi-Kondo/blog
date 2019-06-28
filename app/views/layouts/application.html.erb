@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Blog</title>
+    <title>Arche</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <!-- bootstrapレスポンシブ -->
@@ -19,14 +19,14 @@
   </head>
 
   <body>
+    <header>
+      <%= render 'layouts/header' %>
+    </header>
     <div class="wrap">
-      <header>
-        <div class="">
-          <!-- <img src="" alt="サイトのヘッダー"> -->
-        </div>
-        <%= render 'layouts/header' %>
-      </header>
       <%= yield %>
     </div>
+    <footer>
+      <p>©︎2019 Arche</p>
+    </footer>
   </body>
 </html>
