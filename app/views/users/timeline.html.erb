@@ -9,7 +9,7 @@
           <% @timeline.each do |post| %>
             <div class="row timeline_contents page-header">
               <div class="col-xs-2 timeline_image">
-                <%= attachment_image_tag post.user, :profile_image, format: 'jpeg', fallback: 'no_image.jpg' %>
+                <%= attachment_image_tag post.user, :profile_image, format: 'jpeg', fallback: '/images/no_image.jpg' %>
               </div>
               <div class="col-xs-10">
                 <%= link_to post_path(post.id), :style=> 'text-decoration: none;' do %>

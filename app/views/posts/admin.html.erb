@@ -35,7 +35,7 @@
             </td>
             <td class="row">
               <div class="col-xs-10">
-                <%= attachment_image_tag post, :post_headerimage, format: 'jpeg', fallback: 'no_image.jpg', class: 'post_headerimage' %>
+                <%= attachment_image_tag post, :post_headerimage, format: 'jpeg', fallback: '/images/no_image.jpg', class: 'post_headerimage' %>
               </div>
             </td>
             <td><%= post.title %></td>
