@@ -21,7 +21,7 @@ class Post < ApplicationRecord
 
   def self.search(search)#selfはPost
     if search
-      where(['title LIKE ? OR body LIKE ?', "%#{search}%"])#検索内とnameの部分一致を表示
+      where(['title LIKE ? OR body LIKE ?', "%#{search}%", "%#{search}%"])
     else# SQL記述 %は0字以上の任意文字列
       all
     end
