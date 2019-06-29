@@ -47,4 +47,8 @@ $(document).ready(function(){
             $('.toppage').slideUp(200);
         }
     });
+//フラッシュメッセ
+    $(window).load(function() {
+    	setTimeout("$('.alertfadeout').fadeOut()", 3000);
+    });
 });

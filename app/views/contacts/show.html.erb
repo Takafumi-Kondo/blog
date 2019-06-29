@@ -1,46 +1,46 @@
 <div class="container">
-    <div class="row">
-        <section class="col-xs-10 col-xs-offset-1">
-          <h2>問い合わせ詳細</h2>
-            <ul class="">
-                <li>
-                    <p>投稿日時: <%= @contact.created_at.strftime("%Y-%m-%d %H:%M") %></p>
-                </li>
-                <li>
-                    <p>ユーザーID: <%= @contact.user.id %></p>
-                </li>
-                <li>
-                    <P>ユーザー名: <%= @contact.user.name %></P>
-                </li>
-                <li>
-                    <p>件名: <%= @contact.title %></p>
-                </li>
-                <li>
-                    <p>内容</p>
-                    <p><%= @contact.contact_content %></p>
-                </li>
-            </ul>
-        </section>
-    </div>
-    <br>
+  <div class="row">
+    <section class="col-xs-10 col-xs-offset-1">
+      <h2>問い合わせ詳細</h2>
+      <ul>
+        <li>
+          <p>投稿日時: <%= @contact.created_at.strftime("%Y-%m-%d %H:%M") %></p>
+        </li>
+        <li>
+          <p>ユーザーID: <%= @contact.user.id %></p>
+        </li>
+        <li>
+          <P>ユーザー名: <%= @contact.user.name %></P>
+        </li>
+        <li>
+          <p>件名: <%= @contact.title %></p>
+        </li>
+        <li>
+          <p>内容</p>
+          <p><%= @contact.contact_content %></p>
+        </li>
+      </ul>
+    </section>
+  </div>
+  <br>
 <!-- 返信内容 -->
-    <% if @contact.responce? %>
-        <div class="row">
-            <section class="col-xs-10 col-xs-offset-1">
-                <h4>返信内容</h4>
-                <p><%= @contact.responce %></p>
-            </section>
-        </div>
-    <% end %>
-    <br>
-    <br>
-    <div class="row pb-50">
-        <section class="col-xs-10 col-xs-offset-1">
-          <h3>返信フォーム</h3>
-          <%= form_for [@user, @contact] do |f| %>
-            <%= f.text_area :responce, autofocus: true, required: true, size: '132x10' %><br>
-            <%= f.submit "返信", class: 'btn btn-default' %>
-          <% end %>
+  <% if @contact.responce? %>
+    <div class="row">
+      <section class="col-xs-10 col-xs-offset-1">
+        <h4>返信内容</h4>
+        <p><%= @contact.responce %></p>
       </section>
+    </div>
+  <% end %>
+  <br>
+  <br>
+  <div class="row pb-50">
+    <section class="col-xs-10 col-xs-offset-1">
+      <h3>返信フォーム</h3>
+      <%= form_for [@user, @contact] do |f| %>
+        <%= f.text_area :responce, autofocus: true, required: true, size: '132x10' %><br>
+        <%= f.submit "返信", class: 'btn btn-default' %>
+      <% end %>
+    </section>
   </div>
 </div>

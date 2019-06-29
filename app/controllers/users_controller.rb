@@ -24,12 +24,8 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
-    @posts = if params[:search]
-      @user.posts.page(params[:page]).per(10).where('body LIKE ?', "%#{params[:search]}%")
-    else
-      @user.posts.page(params[:page]).per(10).reverse_order
-    end
-    if @user.id != current_user.id
+    @posts = @user.posts.page(params[:page]).per(20).reverse_order
+    unless @user.id == current_user.id
       redirect_to root_path
     end
   end
@@ -37,6 +33,7 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
+      flash[:notice] = '更新しました。'
       redirect_to user_path
     else
       render :edit
@@ -67,6 +64,9 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @users = @user.following.all
     @timeline = Post.page(params[:page]).where(user_id: @users).per(10).order(created_at: :DESC)
+    unless @user.id == current_user.id
+      redirect_to root_path
+    end
   end
 
   def report
@@ -75,6 +75,9 @@ class UsersController < ApplicationController
     @pv_counts = Post.where(user_id: user, created_at: 3.weeks.ago..Time.now).group('date(created_at)').sum(:impressions_count)
     @genres_data = Post.joins(:genre).where(user_id: user)
     @emotions_data = Post.joins(:emotion).where(user_id: user)
+    unless user.id == current_user.id
+      redirect_to root_path
+    end
   end
 
   def following

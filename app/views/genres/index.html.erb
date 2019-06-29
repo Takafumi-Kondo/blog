@@ -12,9 +12,9 @@
     </div>
   </div>
   <div class="row">
-    <table class="table table-hover">
+    <table class="table table-striped table-hover">
       <thead>
-        <tr class="info">
+        <tr>
           <th>ID</th>
           <th>ジャンル名</th>
           <th>編集</th>
@@ -23,17 +23,17 @@
         </tr>
       </thead>
       <tbody>
-      <% @genres.each do |genre| %>
-        <%= form_for(genre) do |f| %>
-          <tr class="active">
-            <td><%= genre.id %></td>
-            <td><%= genre.genre_name %></td>
-            <td><%=  f.text_field :genre_name, class: 'form_control' %></td>
-            <td><%= f.submit "更新", class: 'btn btn-default' %></td>
-            <td><%= link_to '削除', genre_path(genre.id), method: :delete, "data-confirm" => "削除しますか？", class: 'btn-sm' %></td>
-          </tr>
+        <% @genres.each do |genre| %>
+          <%= form_for(genre) do |f| %>
+            <tr>
+              <td><%= genre.id %></td>
+              <td><%= genre.genre_name %></td>
+              <td><%=  f.text_field :genre_name, class: 'form_control' %></td>
+              <td><%= f.submit "更新", class: 'btn btn-default' %></td>
+              <td><%= link_to '削除', genre_path(genre.id), method: :delete, "data-confirm" => "削除しますか？", class: 'btn-sm' %></td>
+            </tr>
+          <% end %>
         <% end %>
-      <% end %>
       </tbody>
     </table>
     <%= paginate @genres %>
