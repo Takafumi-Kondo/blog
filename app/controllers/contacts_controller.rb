@@ -29,8 +29,7 @@ class ContactsController < ApplicationController
   def update
     @contact = Contact.find(params[:id])
     if @contact.update(contact_params)
-      ContactMailer.contact_mail(@contact).deliver_now
-      binding.pry
+      ContactMailer.contact_mail(@contact).deliver
       flash[:notice] = "返信しました。"
       redirect_to contacts_path
     end
