@@ -1,42 +1,26 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-<div class="container">
+  <div class="container">
     <div class="row">
-        <div class="col-xs-8 col-xs-offset-2">
-            <%= render "devise/shared/error_messages", resource: resource %>
-        </div>
+      <div class="col-xs-8 col-xs-offset-2">
+        <%= render "devise/shared/error_messages", resource: resource %>
+      </div>
     </div>
 
     <div class="row">
-        <div class="col-xs-7 col-xs-offset-2">
-            <div class="text-center">
-                <h1>新規会員登録</h1>
-            </div>
-            <div class="field">
-            <!-- <form class="form-inline"> -->
-                <%= f.label :ユーザー名 %><br />
-                <%= f.text_field :name, autofocus: true,required: true, autocomplete: "name" %>
-            </div>
-            <div class="field">
-                <%= f.label :メールアドレス %><br />
-                <%= f.email_field :email, required: true, autocomplete: "email" %>
-            </div>
-            <div class="field">
-                <%= f.label :パスワード %>
-                <% if @minimum_password_length %>
-                <em>(<%= @minimum_password_length %> characters minimum)</em>
-                <% end %><br />
-                <%= f.password_field :password, required: true, autocomplete: "new-password" %>
-            </div>
-            <div class="field">
-                <%= f.label :パスワード確認 %><br />
-                <%= f.password_field :password_confirmation, required: true, autocomplete: "new-password" %>
-            </div>
-
-            <div class="action">
-                    <%= f.submit "登録", class: '' %>
-            </div>
-            <%= render "devise/shared/links" %>
-        </div>
+      <div class="col-xs-4 col-xs-offset-4">
+        <h1 class="text-center top_title">新規登録</h1>
+        <%= f.text_field :name, autofocus: true,required: true, placeholder: "ユーザー名", autocomplete: "name", class: 'form-control' %>
+        <br>
+        <%= f.email_field :email, required: true, placeholder: "メールアドレス", autocomplete: "email", class: 'form-control' %>
+        <% if @minimum_password_length %>
+        <em>(<%= @minimum_password_length %> characters minimum)</em>
+        <% end %><br />
+        <%= f.password_field :password, required: true, placeholder: "パスワード", autocomplete: "new-password", class: 'form-control' %>
+        <%= f.password_field :password_confirmation, required: true, placeholder: "パスワード確認", autocomplete: "new-password", class: 'form-control' %>
+        <br>
+        <%= f.submit "登録", class: 'btn btn-default btn-block' %>
+        <%= render "devise/shared/links" %>
+      </div>
     </div>
-</div>
+  </div>
 <% end %>
