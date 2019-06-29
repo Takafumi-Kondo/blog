@@ -5,7 +5,7 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
-    @post.postimages.build
+    # @post.postimages.build
   end
 
   def create
@@ -49,7 +49,7 @@ class PostsController < ApplicationController
 
   def edit
     @post = Post.find(params[:id])
-    if @post.user_id != current_user.id
+    unless @post.user.id == current_user.id
       redirect_to root_path
     end
   end
@@ -103,4 +103,3 @@ class PostsController < ApplicationController
     params.require(:post).permit(:title, :body, :user_id, :genre_id, :emotion_id, :impressions_count, :post_headerimage)
   end
 end
-#binding.pry

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Blog</title>
+    <title>Arche</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <!-- bootstrapレスポンシブ -->
@@ -12,21 +12,28 @@
     <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
     <link href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" >
+  <!-- 無限スクロール jscroll -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jscroll/2.4.1/jquery.jscroll.min.js"></script>
-<!-- スライドslick -->
+  <!-- スライドslick -->
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
   </head>
 
   <body>
+    <header>
+      <%= render 'layouts/header' %>
+    </header>
     <div class="wrap">
-      <header>
-        <div class="">
-          <!-- <img src="" alt="サイトのヘッダー"> -->
+      <% if flash[:notice] %>
+        <div class="flash alert alert-info alertfadeout">
+          <%= flash[:notice] %>
+          <button type="button" class="close" data-dismiss="alert" aria-label="閉じる"><span aria-hidden="true">×</span></button>
         </div>
-        <%= render 'layouts/header' %>
-      </header>
+      <% end %>
       <%= yield %>
     </div>
+    <footer>
+      <p>©︎2019 Arche</p>
+    </footer>
   </body>
 </html>

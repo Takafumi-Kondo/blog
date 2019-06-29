@@ -1,6 +1,6 @@
 <section class="container">
-  <%= link_to posts_admin_path do %>
-    <h2>記事管理</h2>
+  <%= link_to posts_admin_path, :style=> 'text-decoration: none;' do %>
+    <h2 style="color: black;">記事管理</h2>
   <% end %>
 <!-- 検索フォーム -->
   <%= form_tag(posts_admin_path, :method => 'get' ) do %><%# 指定しないとpost %>
@@ -10,9 +10,9 @@
 
   <% if @posts.count == 0 %>
   <% else %>
-    <table class="table">
+    <table class="table table-striped table-hover">
       <thead>
-        <tr class="info">
+        <tr>
           <th width="3%">ID</th>
           <th width="7%">ユーザーID</th>
           <th width="10%">ユーザー名</th>
@@ -24,26 +24,26 @@
         </tr>
       </thead>
       <tbody>
-      <% @posts.each do |post| %>
-        <tr class="active">
-          <td><%= post.id %></td>
-          <td><%= post.user.id %></td>
-          <td>
-            <%= link_to user_path(post.user.id) do %>
-            <%= post.user.name %>
-          <% end %>
-          </td>
-          <td class="row">
-            <div class="col-xs-10">
-              <%= attachment_image_tag post, :post_headerimage, format: 'jpeg', fallback: 'no_image.jpg', class: 'post_headerimage' %>
-            </div>
-          </td>
-          <td><%= post.title %></td>
-          <td><%= post.body.truncate(100) %></td>
-          <td><%= link_to "詳細", post_path(post.id) %></td>
-          <td><%= link_to "削除", post_path(post.id), method: :delete, "data-confirm" => "削除しますか？", class: 'btn-sm' %></td>
-        </tr>
-      <% end %>
+        <% @posts.each do |post| %>
+          <tr>
+            <td><%= post.id %></td>
+            <td><%= post.user.id %></td>
+            <td>
+              <%= link_to user_path(post.user.id), :style=> 'text-decoration: none;' do %>
+                <p style="color: black;"><%= post.user.name %></p>
+              <% end %>
+            </td>
+            <td class="row">
+              <div class="col-xs-10">
+                <%= attachment_image_tag post, :post_headerimage, format: 'jpeg', fallback: 'no_image.jpg', class: 'post_headerimage' %>
+              </div>
+            </td>
+            <td><%= post.title %></td>
+            <td><%= post.body.truncate(100) %></td>
+            <td><%= link_to "詳細", post_path(post.id) %></td>
+            <td><%= link_to "削除", post_path(post.id), method: :delete, "data-confirm" => "削除しますか？", class: 'btn-sm' %></td>
+          </tr>
+        <% end %>
       </tbody>
     </table>
     <%= paginate @posts %>
