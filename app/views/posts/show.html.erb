@@ -9,7 +9,7 @@
             <p class="posted_date">投稿日:<%= @post.created_at.strftime("%Y-%m-%d %H:%M") %></p>
             <div class="row">
               <div class="col-xs-6 col-xs-offset-3 post-image">
-                <%= attachment_image_tag @post, :post_headerimage, format: 'jpeg', fallback: 'no_image.jpg', class: 'post_headerimage' %>
+                <%= attachment_image_tag @post, :post_headerimage, format: 'jpeg', fallback: '/images/no_image.jpg', class: 'post_headerimage' %>
               </div>
             </div>
           </div>
@@ -49,7 +49,7 @@
         <% @popular_posts.each do |post| %>
           <div class="row popular_post">
             <div class="col-xs-5">
-              <%= attachment_image_tag post, :post_headerimage, format: 'jpeg', fallback: 'no_image.jpg', class: 'post_headerimage' %>
+              <%= attachment_image_tag post, :post_headerimage, format: 'jpeg', fallback: '/images/no_image.jpg', class: 'post_headerimage' %>
             </div>
             <%= link_to post_path(post.id), :style=> 'text-decoration: none;' do %>
               <p class="text-left"><%= post.title.truncate(30) %></p>

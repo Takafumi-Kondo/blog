@@ -72,7 +72,7 @@ class UsersController < ApplicationController
   def report
     user = User.find(params[:id])
     @total_pv = Post.where(user_id: user).sum(:impressions_count)
-    @pv_counts = Post.where(user_id: user, created_at: 3.weeks.ago..Time.now).group('date(created_at)').sum(:impressions_count)
+    @pv_counts = Post.where(user_id: user, created_at: 1.weeks.ago..Time.now).group('date(created_at)').sum(:impressions_count)
     @genres_data = Post.joins(:genre).where(user_id: user)
     @emotions_data = Post.joins(:emotion).where(user_id: user)
     unless user.id == current_user.id

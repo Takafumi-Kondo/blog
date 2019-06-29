@@ -14,7 +14,7 @@
       <%= form_for(@user) do |f| %>
         <div class="row">
           <div class="col-xs-9 col-xs-offset-1">
-            <%= attachment_image_tag @user, :profile_image, format: 'jpeg', fallback: 'no_image.jpg' %>
+            <%= attachment_image_tag @user, :profile_image, format: 'jpeg', fallback: '/images/no_image.jpg' %>
           </div>
         </div>
         <br>
