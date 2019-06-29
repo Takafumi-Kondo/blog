@@ -1,24 +1,20 @@
-# README
+# Arche(blog)
+ブログ投稿サイトです。各ユーザーごとの投稿記事のジャンル傾向など確認することができ、気になったユーザーをフォローすることができます。記入はMarkdown形式を導入しています。生活で何か感じたことを書き残しシェアしましょう。
+***
+## 使用言語 バージョン
+Ruby 2.3.8  
+Rails 5.2.3 
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+---
+## 使い方
+新規登録後気になるユーザーをフォローしたり、記事を読みアクションをおこしてみましょう。記事の投稿はMarkdown記述可能です。
 
-Things you may want to cover:
+---
+## 作者
+Takafumi-Kondo
 
-* Ruby version
+---
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## 参考にしたサイト
+https://qiita.com  
+https://hatenablog.com
