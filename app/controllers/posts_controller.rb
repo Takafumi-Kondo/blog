@@ -88,11 +88,11 @@ class PostsController < ApplicationController
 # ここまで
     popular_user_count = User.joins(:passive_relationships).group(:following_id).count
     popular_user_ids = Hash[popular_user_count.sort_by{ |_, v| -v }].keys
-    @popular_users = User.where(id: popular_user_ids).limit(10)
+    @popular_users = User.where(id: popular_user_ids).limit(8)
 
     post_favorite_count = Post.joins(:favorites).group(:post_id).count
     post_favorited_ids = Hash[post_favorite_count.sort_by{ |_, v| -v }].keys
-    @popular_posts = Post.where(id: post_favorited_ids)
+    @popular_posts = Post.where(id: post_favorited_ids).limit(10)
     @posts = Post.page(params[:page]).per(9).reverse_order
   end
 

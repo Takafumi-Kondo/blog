@@ -32,7 +32,7 @@
         <%= attachment_image_tag post, :post_headerimage, format: 'jpeg', fallback: '/images/no_image.jpg' %>
       </div>
       <%= link_to post_path(post.id), :style=> 'text-decoration: none;' do %>
-        <h4 style="color: black;"><%= post.title.truncate(34) %></h4>
+        <h4 style="color: black;"><%= post.title.truncate(25) %></h4>
       <% end %>
       <%= link_to user_path(post.user.id), :style=> 'text-decoration: none;' do %>
         <p class="text-right" style="color: black;"><%= post.user.name %></p>
@@ -53,7 +53,7 @@
         <%= attachment_image_tag post, :post_headerimage, format: 'jpeg', fallback: '/images/no_image.jpg' %>
       </div>
       <%= link_to post_path(post.id), :style=> 'text-decoration: none;' do %>
-        <h4 style="color: black;"><%= post.title.truncate(34) %></h4>
+        <h4 style="color: black;"><%= post.title.truncate(25) %></h4>
       <% end %>
       <%= link_to user_path(post.user.id), :style=> 'text-decoration: none;' do %>
         <p class="text-right" style="color: black;"><%= post.user.name %></p>

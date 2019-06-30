@@ -41,7 +41,7 @@
 }
 
 .genre_content_image > img {
-	max-height: 100px;
+	height: 100px;
 }
 .new_content_image > img {
 	max-height: 170px;
@@ -56,6 +56,7 @@
 
 .profile_image {
 	width: 90%;
+	margin-bottom: 5px;
 }
 
 .new_contents ~ nav.pagination, .timeline_contents ~ nav.pagination {
