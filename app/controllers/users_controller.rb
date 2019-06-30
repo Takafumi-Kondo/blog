@@ -11,7 +11,7 @@ class UsersController < ApplicationController
   #いいね数多い記事取得
     post_favorite_count = Post.joins(:favorites).where(user_id: params[:id]).group(:post_id).count
     post_favorited_ids = Hash[post_favorite_count.sort_by{ |_, v| -v }].keys
-    @popular_posts = Post.where(id: post_favorited_ids).limit(5)
+    @popular_posts = Post.where(id: post_favorited_ids).limit(4)
   end
 
   def index

@@ -1,13 +1,9 @@
-<div class="sidebar">
-  <div class="text-center">
-    <%= attachment_image_tag user, :profile_image, format: 'jpeg', fallback: '/images/no_image.jpg', class: 'profile-img' %>
-  </div>
+<section class="sidebar">
+  <%= attachment_image_tag user, :profile_image, format: 'jpeg', fallback: '/images/no_image.jpg', class: 'profile-img' %>
   <br>
-  <div class="">
-    <p><%= user.name %></p>
-    <p class="introduction"><%= user.introduction%></p>
-  </div>
-  <div class="">
+  <p><%= user.name %></p>
+  <p class="text-left"><%= user.introduction%></p>
+  <div class="text-center">
     <%= link_to "フォロー #{user.following.count}", following_user_path(user) %>
     <%= link_to "フォロワー #{user.followers.count}", followers_user_path(user) %>
     <% if user_signed_in? %>
@@ -25,4 +21,4 @@
       <% end %>
     <% end %>
   </div>
-</div>
+</section>

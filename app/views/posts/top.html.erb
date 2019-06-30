@@ -57,7 +57,9 @@
           </div>
           <%= link_to user_path(user.id), :style=> 'text-decoration: none;' do %>
             <p style="color: black;"><%= user.name %></p>
-            <p style="color: black;"><%= user.introduction.truncate(25) %></p>
+            <% if user.introduction? %>
+              <p style="color: black;"><%= user.introduction.truncate(25) %></p>
+            <% end %>
           <% end %>
         </div>
       <% end %>
