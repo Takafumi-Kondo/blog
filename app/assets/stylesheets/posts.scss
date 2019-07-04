@@ -14,10 +14,6 @@
   margin: 0 auto;
   max-height: 350px;
 }
-.post_headerimage {
-	width: 100%;
-	max-height: 160px;
-}
 
 .genre_contents, .popular_contents, .user_contents, .new_contents, .item {
 	margin-bottom: 40px;
@@ -40,11 +36,17 @@
 	margin-bottom: 20px;
 }
 
+.popular_content_image > img {
+	max-height: 140px;
+	margin: 5px 0;
+}
 .genre_content_image > img {
 	height: 100px;
+	margin: 5px 0;
 }
 .new_content_image > img {
-	max-height: 170px;
+	max-height: 155px;
+	margin: 5px 0;
 }
 .timeline_image > img {
 	max-height: 120px;
