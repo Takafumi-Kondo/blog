@@ -52,8 +52,8 @@
       <h3 class="page-header">おすすめのユーザー</h3>
       <% @popular_users.each do |user| %>
         <div class="row user_contents">
-          <div class="col-xs-4">
-            <%= attachment_image_tag user, :profile_image, format: 'jpeg', fallback: '/images/no_image.jpg', size: '60x90', class: 'profile_image' %>
+          <div class="col-xs-4 user_content_image">
+            <%= attachment_image_tag user, :profile_image, format: 'jpeg', fallback: '/images/no_image.jpg', class: 'profile_image' %>
           </div>
           <%= link_to user_path(user.id), :style=> 'text-decoration: none;' do %>
             <p style="color: black;"><%= user.name %></p>
