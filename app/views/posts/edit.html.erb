@@ -2,19 +2,29 @@
   <div class="row">
     <div class="col-xs-12">
       <h2>編集</h2>
-      <%= form_for @post do |f| %>
+    </div>
+    <%= form_for @post do |f| %>
+      <div class="col-xs-12 top_image">
         <%= f.label :post_headerimage, "トップ画" %>
         <%= f.attachment_field :post_headerimage %>
+      </div>
+      <div class="col-xs-3">
+        <%= f.label :genre_id, "ジャンル" %>
+        <%= f.collection_select :genre_id, Genre.all, :id, :genre_name, class: 'form-control input-sm' %>
+      </div>
+      <div class="col-xs-9">
+        <%= f.label :emotion_id, "気分" %>
+        <%= f.collection_select :emotion_id, Emotion.all, :id, :emotion_name, class: 'form-control input-sm' %>
+      </div>
+      <div class="col-xs-12">
         <%= f.label :title, "タイトル" %>
         <%= f.text_field :title, class: 'form-control' %>
         <%= f.label :body, "本文" %>
         <%= f.text_area :body, rows:'20', class: 'form-control input-lg' %><br>
-        <%= f.label :genre_id, "ジャンル" %>
-        <%= f.collection_select :genre_id, Genre.all, :id, :genre_name, class: 'form-control input-sm' %>
-        <%= f.label :emotion_id, "気分" %>
-        <%= f.collection_select :emotion_id, Emotion.all, :id, :emotion_name, class: 'form-control input-sm' %>
-        <%= f.submit "編集" %>
-      <% end %>
-    </div>
+      </div>
+      <div class ="col-xs-6 col-xs-offset-3">
+        <%= f.submit "編集", class: 'btn btn-default btn-block' %>
+      </div>
+    <% end %>
   </div>
 </section>
