@@ -51,4 +51,10 @@ $(document).ready(function(){
     $(window).load(function() {
     	setTimeout("$('.alertfadeout').fadeOut()", 3000);
     });
+
+    $('.hm_menu').on('click', function() {
+    	$(this).toggleClass('active');
+    	$('.header_nav').fadeToggle();
+    	return false;
+    });
 });
