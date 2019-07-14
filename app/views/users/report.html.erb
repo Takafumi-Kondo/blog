@@ -8,10 +8,10 @@
   <section>
     <h3 class="page-header">投稿傾向</h3>
     <div class="row">
-      <div class="col-xs-6">
+      <div class="col-sm-6">
         <%= pie_chart @genres_data.group(:genre_name).count %>
       </div>
-      <div class="col-xs-6">
+      <div class="col-sm-6">
         <%= pie_chart @emotions_data.group(:emotion_name).count %>
       </div>
     </div>
