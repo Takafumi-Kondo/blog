@@ -6,7 +6,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @genres_data = Post.joins(:genre).where(user_id: params[:id])
     @emotions_data = Post.joins(:emotion).where(user_id: params[:id])
-    @new_posts = Post.page(params[:page]).where(user_id: params[:id]).per(10).reverse_order
+    @new_posts = Post.page(params[:page]).where(user_id: params[:id]).per(12).reverse_order
     @post_pv_counts = Post.where(user_id: params[:id]).group(:impressions_count).order(impressions_count: "DESC").limit(5)
   #いいね数多い記事取得
     post_favorite_count = Post.joins(:favorites).where(user_id: params[:id]).group(:post_id).count

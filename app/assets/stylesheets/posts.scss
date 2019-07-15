@@ -10,13 +10,9 @@
 	background-color: white;
 }
 
-.posted_date {
-	opacity: 0.4;
-}
-
 .post-image img {
-  margin: 0 auto;
-  max-height: 350px;
+	margin: 0 auto;
+	max-height: 350px;
 }
 
 .genre_contents, .popular_contents, .user_contents, .new_contents, .item {
@@ -61,6 +57,10 @@
 }
 .admin_post_image > img {
 	max-height: 60px;
+	margin: 5px 0;
+}
+.post_list_image > img {
+	max-height: 120px;
 	margin: 5px 0;
 }
 .profile_image {

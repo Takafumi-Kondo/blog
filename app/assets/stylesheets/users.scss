@@ -11,27 +11,144 @@
 	height: 120px;
 	margin: 0 auto;
 }
-
-.section_title {
-	padding: 20px 0;
+.item {
+	position: relative;
+}
+.top_posted_date {
+	position: absolute;
+	right: 3px;
+	bottom: 0;
+	opacity: 0.5;
 }
 
-.post_contents, .popular_post {
+.user_post_image > img {
+	width: 100%;
+	max-height: 150px;
+	margin: 5px 0;
+}
+.posted_date {
+	opacity: 0.5;
+}
+
+.post_content, .popular_post {
+	position: relative;
 	margin-bottom: 40px;
 	border-radius: 5px;
 	box-shadow: 0px 5px 10px #ecf0f3;;
 }
-.post_contents:hover, .popular_post:hover {
+.post_content:hover, .popular_post:hover {
 	transform: scale(1.05);
 	background-color: #ecf0f3;
 	box-shadow: 0 1px 5px #999;
 	transition-duration: 0.5s;/*掛ける時間*/
 }
 
+.sidebar_top {
+	margin-bottom: 50px;
+}
+.popular_headertitle {
+	margin: 55px 0 10px !important;
+}
 .popular_post {
 	margin-bottom: 10px;
 }
-
-.delete_user, .sidebar {
+.popular_headerimage {
+	width: 100%;
+	max-height: 100px;
+	margin: 5px 0;
+}
+.pie_chart {
+	margin: 10px 0;
+}
+.pie_chart_bottom {
 	margin-top: 20px;
+}
+
+.edit_sidebar {
+	margin-top: 20px;
+}
+input#user_profile_image, input#user_profile_headerimage {
+	margin: 0 auto;
+}
+
+.delete_user {
+	margin-top: 20px;
+}
+
+
+@media screen and (max-width: 1024px) {
+	.post_content{
+		margin-bottom: 10px;
+
+	}
+	.user_post_image > img {
+		max-height: 115px;
+	}
+	.user_post_title {
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		font-size: 14px;
+		margin: 5px 0 0 0;
+	}
+	.user_post_genre {
+		font-size: 10px;
+	}
+	.posted_date {
+		margin: 20px 0 10px 0;
+		font-size: 10px;
+	}
+
+	.popular_headertitle {
+		font-size: 17px;
+	}
+	.user_popularpost_title {
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		font-size: 12px;
+		margin: 0;
+	}
+	.user_popularpost_genre {
+		font-size: 10px;
+	}
+}
+
+@media screen and (max-width: 767px) {
+	.post_contents {
+		margin: 0 10px;
+	}
+}
+
+@media screen and (max-width: 500px) {
+	.post_contents {
+		width: 98% !important;
+		margin: 0 5px;
+	}
+	.user_post_title {
+		font-size: 12px;
+	}
+	.user_post_image > img {
+		max-height: 115px;
+	}
+
+	.sidebar {
+		width: 98% !important;
+	}
+	.popular_post {
+		margin: 0 5px 10px;
+	}
+	.user_popular_image {
+		width: 33.33% !important;
+	}
+	.user_popular_image > img{
+		max-height: 120px;
+	}
+	.user_popularpost_title {
+		font-size: 18px;
+	}
+	.user_popularpost_genre {
+		font-size: 14px;
+		margin-top: 10px;
+	}
 }

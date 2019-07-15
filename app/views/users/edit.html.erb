@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <section class="col-xs-9">
+    <section class="col-md-8 col-lg-9">
       <% if @posts.count == 0 %>
         <h2>まだ記事はありません。</h2>
       <% else %>
@@ -10,10 +10,10 @@
       <% end %>
     </section>
     <!-- サイドバー ユーザー編集 -->
-    <section class="col-xs-3 text-center sidebar">
+    <section class="col-xs-8 col-xs-offset-2 col-md-4 col-md-offset-0 col-lg-3 text-center edit_sidebar">
       <%= form_for(@user) do |f| %>
         <div class="row">
-          <div class="col-xs-9 col-xs-offset-1">
+          <div class="col-xs-6 col-xs-offset-3 col-md-10 col-md-offset-1">
             <%= attachment_image_tag @user, :profile_image, format: 'jpeg', fallback: '/images/no_image.jpg' %>
           </div>
         </div>
