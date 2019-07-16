@@ -8,7 +8,7 @@
             <p><%= @post.genre.genre_name %></p>
             <p class="posted_date">投稿日:<%= @post.created_at.strftime("%Y-%m-%d %H:%M") %></p>
             <div class="row">
-              <div class="col-xs-6 col-xs-offset-3 post-image">
+              <div class="col-xs-6 col-xs-offset-3 post_image">
                 <%= attachment_image_tag @post, :post_headerimage, format: 'jpeg', fallback: '/images/no_image.jpg', class: 'post_headerimage' %>
               </div>
             </div>

@@ -39,7 +39,7 @@
               <div class="col-xs-8 col-xs-offset-2 col-sm-offset-0 col-sm-4 col-md-5 user_post_image">
                 <%= attachment_image_tag post, :post_headerimage, format: 'jpeg', fallback: '/images/no_image.jpg' %>
               </div>
-              <div class="col-xs-12 col-sm-8 col-md-7 ">
+              <div class="col-xs-12 col-sm-8 col-md-7">
                 <h4 class="user_post_title"><%= post.title.truncate(20) %></h4>
                 <p class="user_post_genre"><%= post.genre.genre_name %></p>
                 <p class="text-right posted_date">
