@@ -84,6 +84,13 @@ input#user_profile_image, input#user_profile_headerimage {
 	margin-top: 20px;
 }
 
+.timeline_image > img {
+	max-height: 120px;
+}
+.timeline_sidebar {
+	margin-top: 30px;
+}
+
 @media screen and (max-width: 1024px) {
 	.post_content{
 		margin-bottom: 10px;
@@ -125,6 +132,10 @@ input#user_profile_image, input#user_profile_headerimage {
 @media screen and (max-width: 767px) {
 	.post_contents {
 		margin: 0 10px;
+	}
+
+	.timeline_sidebar {
+		display: none;
 	}
 }
 
