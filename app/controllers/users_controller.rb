@@ -36,6 +36,8 @@ class UsersController < ApplicationController
       flash[:notice] = '更新しました。'
       redirect_to user_path
     else
+      @posts = @user.posts.page(params[:page]).per(20).reverse_order
+      flash[:notice] = 'ユーザーネーム１５文字以内、紹介文１５０文字以内です。'
       render :edit
     end
   end

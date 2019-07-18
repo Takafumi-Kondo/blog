@@ -4,10 +4,11 @@ class GenresController < ApplicationController
   def create
     @genre = Genre.new(genre_params)
     if @genre.save
+      flash[:notice] = '登録しました。'
       redirect_to genres_path
     else
       @genres = Genre.page(params[:page]).per(10).reverse_order
-      flash[:notice] = '登録済みです。'
+      flash[:notice] = '同名以外の１２文字以内で登録可能です。'
       render :index
     end
   end
@@ -18,11 +19,13 @@ class GenresController < ApplicationController
   end
 
   def update
-    genre = Genre.find(params[:id])
-    if genre.update(genre_params)
+    @genre = Genre.find(params[:id])
+    if @genre.update(genre_params)
+      flash[:notice] = '更新しました。'
       redirect_to genres_path
     else
       @genres = Genre.page(params[:page]).per(10).reverse_order
+      flash[:notice] = '同名以外の１２文字以内で登録可能です。'
       render :index
     end
   end
@@ -30,6 +33,7 @@ class GenresController < ApplicationController
   def destroy
     genre = Genre.find(params[:id])
     genre.destroy
+    flash[:notice] = '削除しました。'
     redirect_to genres_path
   end
 
