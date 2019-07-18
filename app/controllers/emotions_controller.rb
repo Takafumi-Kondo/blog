@@ -6,6 +6,8 @@ class EmotionsController < ApplicationController
     if @emotion.save
       redirect_to emotions_path
     else
+      @emotions = Emotion.page(params[:page]).per(10).reverse_order
+      flash[:notice] = '登録済みです。'
       render :index
     end
   end
@@ -38,4 +40,3 @@ class EmotionsController < ApplicationController
     params.require(:emotion).permit(:emotion_name)
   end
 end
-#binding.pry

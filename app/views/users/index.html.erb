@@ -1,38 +1,48 @@
 <section class="container">
-  <%= link_to users_path, :style=> 'text-decoration: none;' do %>
-    <h2 style="color: black;">ユーザー一覧</h2>
-  <% end %>
-<!-- 検索フォーム -->
-  <%= form_tag(users_path, :method => 'get' ) do %><%# 指定しないとpost,tagはDB変更しないとき%>
-    <%= text_field_tag :search, params[:search] %>
-    <%= submit_tag "検索", class: 'btn btn-default', :name => nil %><%#urlを消してる%>
-  <% end %>
-
-  <% if @users.count == 0 %>
-  <% else %>
-    <table class="table table-striped table-hover">
-    <thead>
-      <tr>
-        <th width="3%">ID</th>
-        <th width="10%">ユーザー名</th>
-        <th>紹介文</th>
-        <th width="15%">メール</th>
-        <th width="5%"></th>
-        <th width="6%"></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @users.each do |user| %>
-        <tr>
-          <td><%= user.id %></td>
-          <td><%= user.name %></td>
-          <td><%= user.introduction %></td>
-          <td><%= user.email %></td>
-          <td><%= link_to "詳細", user_path(user.id) %></td>
-          <td><%= link_to "削除", delete_user_path(user) %></td>
-        </tr>
+  <div class="row">
+    <div class="col-xs-6 col-sm-4">
+      <%= link_to users_path, :style=> 'text-decoration: none;' do %>
+        <h1 class="user_list_title" style="color: black;">ユーザー一覧</h1>
       <% end %>
-    </tbody>
-    </table>
-  <% end %>
+    </div>
+  <!-- 検索フォーム -->
+    <div class="col-xs-6 col-sm-5">
+      <%= form_tag(users_path, :method => 'get' ) do %><%# 指定しないとpost,tagはDB変更しないとき%>
+        <div class="input-group user_search">
+          <%= text_field_tag :search, params[:search], class: 'form-control' %>
+          <span class="input-group-btn">
+            <%= submit_tag "検索", class: 'btn btn-default', :name => nil %><%#urlを消してる%>
+          </span>
+        </div>
+      <% end %>
+    </div>
+    <% if @users.count == 0 %>
+    <% else %>
+      <table class="table table-striped table-hover user">
+        <thead>
+          <tr class="user_list">
+            <th width="5%">ID</th>
+            <th class="col-xs-1">ユーザー名</th>
+            <th class="col-xs-2">紹介文</th>
+            <th class="col-xs-1">メール</th>
+            <th class="col-xs-1"></th>
+            <th class="col-xs-1"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @users.each do |user| %>
+            <tr class="user_list">
+              <td><%= user.id %></td>
+              <td><%= user.name %></td>
+              <td><%= user.introduction %></td>
+              <td><%= user.email %></td>
+              <td class="text-center"><%= link_to "詳細", user_path(user.id), class: 'btn btn-link' %></td>
+              <td class="text-center"><%= link_to "削除", delete_user_path(user), class: 'btn btn-link' %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <%= paginate @users %>
+    <% end %>
+  </div>
 </section>

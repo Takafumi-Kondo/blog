@@ -6,6 +6,8 @@ class GenresController < ApplicationController
     if @genre.save
       redirect_to genres_path
     else
+      @genres = Genre.page(params[:page]).per(10).reverse_order
+      flash[:notice] = '登録済みです。'
       render :index
     end
   end
