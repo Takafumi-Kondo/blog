@@ -71,10 +71,18 @@ input#user_profile_image, input#user_profile_headerimage {
 	margin: 0 auto;
 }
 
+.user {
+	table-layout: fixed;
+	word-wrap: break-word;
+}
+.user_search {
+	margin: 25px 0;
+	z-index: 0;
+}
+
 .delete_user {
 	margin-top: 20px;
 }
-
 
 @media screen and (max-width: 1024px) {
 	.post_content{
@@ -150,5 +158,14 @@ input#user_profile_image, input#user_profile_headerimage {
 	.user_popularpost_genre {
 		font-size: 14px;
 		margin-top: 10px;
+	}
+
+	.user_list_title {
+		font-size: 20px;
+		line-height: 47px;
+	}
+	.user_list > th, .user_list > td {
+		padding: 5px 0 !important;
+		font-size: 10px;
 	}
 }

@@ -1,13 +1,16 @@
 <section class="container">
   <div class="row">
-    <div class="col-xs-3">
-      <h1>気分一覧</h1>
+    <div class="col-xs-4 col-sm-7 col-lg-9">
+      <h1 class="emotion_title_list">気分一覧</h1>
     </div>
-    <div class="col-xs-3 col-xs-offset-6">
+    <div class="col-xs-8 col-sm-5 col-lg-3">
       <%= form_for(@emotion) do |f| %>
-        <br>
-        <%= f.text_field :emotion_name, required: true, class: 'form-conntrol' %>
-        <%= f.submit "新規登録", class: 'btn btn-default' %>
+        <div class="input-group emotion_new">
+          <%= f.text_field :emotion_name, required: true, class: 'form-control' %>
+          <span class="input-group-btn">
+            <%= f.submit "新規登録", class: 'btn btn-default' %>
+          </span>
+        </div>
       <% end %>
     </div>
   </div>
@@ -25,12 +28,12 @@
       <tbody>
         <% @emotions.each do |emotion| %>
           <%= form_for(emotion) do |f| %>
-            <tr>
+            <tr class="admin_emotion">
               <td><%= emotion.id %></td>
               <td><%= emotion.emotion_name %></td>
               <td><%=  f.text_field :emotion_name, class: 'form_control' %></td>
               <td><%= f.submit "更新", class: 'btn btn-default' %></td>
-              <td><%= link_to '削除', emotion_path(emotion.id), method: :delete, "data-confirm" => "削除しますか？", class: 'btn-sm' %></td>
+              <td><%= link_to '削除', emotion_path(emotion.id), method: :delete, "data-confirm" => "削除しますか？", class: 'btn btn-link' %></td>
             </tr>
           <% end %>
         <% end %>

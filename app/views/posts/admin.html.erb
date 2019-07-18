@@ -1,51 +1,60 @@
 <section class="container">
-  <%= link_to posts_admin_path, :style=> 'text-decoration: none;' do %>
-    <h2 style="color: black;">記事管理</h2>
-  <% end %>
-<!-- 検索フォーム -->
-  <%= form_tag(posts_admin_path, :method => 'get' ) do %><%# 指定しないとpost %>
-    <%= text_field_tag :search %>
-    <%= submit_tag "検索", :name => nil %><%#urlを消してる%>
-  <% end %>
-
-  <% if @posts.count == 0 %>
-  <% else %>
-    <table class="table table-striped table-hover">
-      <thead>
-        <tr>
-          <th width="3%">ID</th>
-          <th width="7%">ユーザーID</th>
-          <th width="10%">ユーザー名</th>
-          <th width="10%">トップ画</th>
-          <th width="15%">タイトル</th>
-          <th>本文</th>
-          <th width="7%"></th>
-          <th width="7%"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @posts.each do |post| %>
-          <tr>
-            <td><%= post.id %></td>
-            <td><%= post.user.id %></td>
-            <td>
-              <%= link_to user_path(post.user.id), :style=> 'text-decoration: none;' do %>
-                <p style="color: black;"><%= post.user.name %></p>
-              <% end %>
-            </td>
-            <td class="row">
-              <div class="col-xs-10 admin_post_image">
-                <%= attachment_image_tag post, :post_headerimage, format: 'jpeg', fallback: '/images/no_image.jpg', class: 'post_headerimage' %>
-              </div>
-            </td>
-            <td><%= post.title.truncate(50) %></td>
-            <td><%= post.body.truncate(100) %></td>
-            <td><%= link_to "詳細", post_path(post.id) %></td>
-            <td><%= link_to "削除", post_path(post.id), method: :delete, "data-confirm" => "削除しますか？", class: 'btn-sm' %></td>
+  <div class="row">
+    <div class="col-xs-6 col-sm-4">
+      <%= link_to posts_admin_path, :style=> 'text-decoration: none;' do %>
+        <h1 class="admin_post_title" style="color: black;">記事管理</h1>
+      <% end %>
+    </div>
+  <!-- 検索フォーム -->
+    <div class="col-xs-6 col-sm-5">
+      <%= form_tag(posts_admin_path, :method => 'get' ) do %>
+        <div class="input-group admin_post_search">
+          <%= text_field_tag :search, params[:search], class: 'form-control' %>
+          <span class="input-group-btn">
+            <%= submit_tag "検索", class: 'btn btn-default', :name => nil %>
+          </span>
+        </div>
+      <% end %>
+    </div>
+    <% if @posts.count == 0 %>
+    <% else %>
+      <table class="table table-striped table-hover admin_posts">
+        <thead>
+          <tr class="admin_post">
+            <th width="3%">ID</th>
+            <th width="3%">ユーザーID</th>
+            <th class="col-xs-1">ユーザー名</th>
+            <th class="col-xs-1 admin_post_topimage">トップ画</th>
+            <th class="col-xs-1">タイトル</th>
+            <th class="col-xs-2">本文</th>
+            <th width="6%"></th>
+            <th width="6%"></th>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
-    <%= paginate @posts %>
-  <% end %>
+        </thead>
+        <tbody>
+          <% @posts.each do |post| %>
+            <tr class="admin_post">
+              <td><%= post.id %></td>
+              <td><%= post.user.id %></td>
+              <td>
+                <%= link_to user_path(post.user.id), :style=> 'text-decoration: none;' do %>
+                  <p style="color: black;"><%= post.user.name %></p>
+                <% end %>
+              </td>
+              <td class="row admin_post_topimage">
+                <div class="col-xs-10 admin_post_image">
+                  <%= attachment_image_tag post, :post_headerimage, format: 'jpeg', fallback: '/images/no_image.jpg', class: 'post_headerimage' %>
+                </div>
+              </td>
+              <td><%= post.title.truncate(50) %></td>
+              <td><%= post.body.truncate(100) %></td>
+              <td class="text-center"><%= link_to "詳細", post_path(post.id), class: 'btn btn-link' %></td>
+              <td class="text-center"><%= link_to "削除", post_path(post.id), method: :delete, "data-confirm" => "削除しますか？", class: 'btn btn-link' %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <%= paginate @posts %>
+    <% end %>
+  </div>
 </section>

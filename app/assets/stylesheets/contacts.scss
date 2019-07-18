@@ -5,3 +5,27 @@
 li {
 	list-style: none;
 }
+
+.contacts {
+	table-layout: fixed;
+	word-wrap: break-word;
+}
+
+@media screen and (max-width:1024px) {
+	.contact > th {
+		font-size: 11px;
+		padding: 0 3px 3px !important;
+	}
+
+	.contact > td {
+		padding: 3px 3px !important;
+	}
+}
+@media screen and (max-width:500px) {
+	.contact_title_list {
+		font-size: 15px;
+	}
+	.contact > td {
+		font-size: 10px;
+	}
+}
