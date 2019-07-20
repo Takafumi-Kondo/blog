@@ -4,8 +4,8 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @genres_data = Post.joins(:genre).where(user_id: params[:id])
-    @emotions_data = Post.joins(:emotion).where(user_id: params[:id])
+    @genres_data = Post.joins(:genre).where(user_id: params[:id]).order(impressions_count: 'DESC').limit(4)
+    @emotions_data = Post.joins(:emotion).where(user_id: params[:id]).order(impressions_count: 'DESC').limit(4)
     @new_posts = Post.page(params[:page]).where(user_id: params[:id]).per(12).reverse_order
     @post_pv_counts = Post.where(user_id: params[:id]).group(:impressions_count).order(impressions_count: "DESC").limit(5)
   #いいね数多い記事取得
@@ -74,9 +74,14 @@ class UsersController < ApplicationController
   def report
     user = User.find(params[:id])
     @total_pv = Post.where(user_id: user).sum(:impressions_count)
-    @pv_counts = Post.where(user_id: user, created_at: 1.weeks.ago..Time.now).group('date(created_at)').sum(:impressions_count)
-    @genres_data = Post.joins(:genre).where(user_id: user)
-    @emotions_data = Post.joins(:emotion).where(user_id: user)
+    pv_counts = Post.where(user_id: user, created_at: 1.weeks.ago..Date.today).group('date(created_at)').sum(:impressions_count)
+    @pv_counts = if pv_counts.empty?
+      {Date.today => 0}
+    else
+      pv_counts
+    end
+    @genres_data = Post.joins(:genre).where(user_id: user).order(impressions_count: 'DESC').limit(10)
+    @emotions_data = Post.joins(:emotion).where(user_id: user).order(impressions_count: 'DESC').limit(10)
     unless user.id == current_user.id
       redirect_to root_path
     end
