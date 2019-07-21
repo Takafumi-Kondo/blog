@@ -4,8 +4,8 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @genres_data = Post.joins(:genre).where(user_id: params[:id])
-    @emotions_data = Post.joins(:emotion).where(user_id: params[:id])
+    @genres_data = Post.joins(:genre).where(user_id: params[:id]).order(impressions_count: 'DESC').limit(4)
+    @emotions_data = Post.joins(:emotion).where(user_id: params[:id]).order(impressions_count: 'DESC').limit(4)
     @new_posts = Post.page(params[:page]).where(user_id: params[:id]).per(12).reverse_order
     @post_pv_counts = Post.where(user_id: params[:id]).group(:impressions_count).order(impressions_count: "DESC").limit(5)
   #いいね数多い記事取得
@@ -80,8 +80,8 @@ class UsersController < ApplicationController
     else
       pv_counts
     end
-    @genres_data = Post.joins(:genre).where(user_id: user)
-    @emotions_data = Post.joins(:emotion).where(user_id: user)
+    @genres_data = Post.joins(:genre).where(user_id: user).order(impressions_count: 'DESC').limit(10)
+    @emotions_data = Post.joins(:emotion).where(user_id: user).order(impressions_count: 'DESC').limit(10)
     unless user.id == current_user.id
       redirect_to root_path
     end
