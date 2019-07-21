@@ -13,10 +13,15 @@
 .post_show {
 	background-color: white;
 }
-
 .post_image img {
 	margin: 0 auto;
 	max-height: 350px;
+}
+.post_sidebar_bottom {
+	margin-top: 30px;
+}
+.follow, .follower {
+	padding: 0 5px !important;
 }
 
 .genre_contents, .popular_contents, .user_contents, .new_contents, .item {
@@ -78,7 +83,8 @@
 	margin-bottom: 5px;
 }
 .comment_image > img {
-	max-height: 40px;
+	max-height: 80px;
+	margin: 5px 0;
 }
 
 .section_title {
@@ -263,6 +269,10 @@
 	.new_content_image > img {
 		max-height: 90px;
 	}
+
+	.post_title {
+		font-size: 20px;
+	}
 }
 
 @media screen and (max-width:500px) {
@@ -329,5 +339,15 @@
 	}
 	.admin_post > .admin_post_topimage {
 		display: none;
+	}
+
+	.post_show {
+		width: 100% !important;
+	}
+	.post_sidebar {
+		width: 100% !important;
+	}
+	.comment_image {
+		padding: 0 5px !important;
 	}
 }
