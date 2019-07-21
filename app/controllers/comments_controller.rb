@@ -9,7 +9,7 @@ class CommentsController < ApplicationController
   		flash[:notice] = "コメントしました。"
   		redirect_to post_path(post)
   	else
-  		flash[:notice] = "内容を入力してください。"
+  		flash[:notice] = "コメントは１５０文字以内です。"
   		redirect_to post_path(post)
   	end
   end

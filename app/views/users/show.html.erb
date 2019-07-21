@@ -75,12 +75,13 @@
         <!-- プロフィール -->
           <%= render 'users/side', user: @user %>
         <!-- 円グラフ -->
-        <div class="pie_chart">
-          <div class="pie_chart_top">
-            <%= pie_chart @genres_data.group(:genre_name).count %>
-          </div>
-          <div class="pie_chart_bottom">
-            <%= pie_chart @emotions_data.group(:emotion_name).count %>
+          <div class="pie_chart">
+            <div class="pie_chart_top">
+              <%= pie_chart @genres_data.group(:genre_name).count %>
+            </div>
+            <div class="pie_chart_bottom">
+              <%= pie_chart @emotions_data.group(:emotion_name).count %>
+            </div>
           </div>
         </div>
       </section>
