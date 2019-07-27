@@ -8,7 +8,7 @@ class Post < ApplicationRecord
 
   attachment :post_headerimage
 
-  is_impressionable counter_cache: true, unique: :all
+  is_impressionable counter_cache: true
 
 
     validates :title, presence: true, length: { maximum: 100 }

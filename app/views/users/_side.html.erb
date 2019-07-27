@@ -1,14 +1,14 @@
 <%= attachment_image_tag user, :profile_image, format: 'jpeg', fallback: '/images/no_image.jpg', class: 'profile-img' %>
 <br>
 <p><%= user.name %></p>
-<p class="text-left"><%= user.introduction%></p>
+<p class="text-left sidebar_introduction"><%= user.introduction%></p>
 <div class="text-center">
-  <div clas="container">
+  <div class="container-fluid">
     <div class="row">
-      <div class="col-md-5 col-md-offset-1 follow">
+      <div class="col-md-6 follow">
         <%= link_to "フォロー #{user.following.count}", following_user_path(user) %>
       </div>
-      <div class="col-md-5 follower">
+      <div class="col-md-6 follower">
         <%= link_to "フォロワー #{user.followers.count}", followers_user_path(user) %>
       </div>
     </div>

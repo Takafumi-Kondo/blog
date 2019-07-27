@@ -22,6 +22,7 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    impressionist(@post, nil, :unique => [:session_hash])
     @comment = Comment.new
     @user = User.find_by(id: @post.user)
     @page_views = @post.impressions_count
@@ -82,9 +83,10 @@ class PostsController < ApplicationController
 # ジャンル別人気欄
     genre_post_count = Post.all.group(:genre_id).count
     genre_post_ids = Hash[genre_post_count.sort_by{ |_, v| -v }].keys
-    @genre_popular_posts = Post.where(genre_id: genre_post_ids[0]).order(impressions_count: 'DESC').limit(4)
-    @genre_popular_posts2 = Post.where(genre_id: genre_post_ids[1]).order(impressions_count: 'DESC').limit(4)
-    @genre_popular_posts3 = Post.where(genre_id: genre_post_ids[2]).order(impressions_count: 'DESC').limit(4)
+    num = [0, 1, 2]
+    @genre_popular_posts = num.map do |x|
+      Post.where(genre_id: genre_post_ids[x]).order(impressions_count: 'DESC').limit(4)
+    end
 # ここまで
     popular_user_count = User.joins(:passive_relationships).group(:following_id).count
     popular_user_ids = Hash[popular_user_count.sort_by{ |_, v| -v }].keys
