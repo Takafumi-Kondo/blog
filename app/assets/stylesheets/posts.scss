@@ -75,7 +75,7 @@
 	margin: 5px 0;
 }
 .post_list_image > img {
-	max-height: 120px;
+	max-height: 155px;
 	margin: 5px 0;
 }
 .profile_image {
@@ -105,6 +105,20 @@
 .admin_post > td {
 	word-wrap: break-word;
 	padding: 5px 1px !important;
+}
+
+.post_list_contents {
+	position: relative;
+	height: 165px;
+	margin-bottom: 20px;
+}
+.post_lists {
+	position: absolute;
+	right: 3px;
+	bottom: 10px;
+}
+.post_list_date {
+	opacity: 0.5;
 }
 
 .new_contents ~ nav.pagination, .timeline_contents ~ nav.pagination {
@@ -183,6 +197,22 @@
 
 	.admin_post > td {
 		font-size: 10px;
+	}
+
+	.post_list_contents {
+		max-height: 155px;
+	}
+	.post_list_title {
+		font-size: 16px;
+	}
+	.post_list_genre {
+		font-size: 12px;
+	}
+	.post_lists {
+		font-size: 11px;
+	}
+	.post_list_image > img {
+		max-height: 130px;
 	}
 }
 
@@ -273,6 +303,27 @@
 	.post_title {
 		font-size: 20px;
 	}
+
+	.post_list_contents {
+		height: 100px;
+		margin-bottom: 10px;
+	}
+	.post_list_title {
+		font-size: 12px;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		margin: 0;
+	}
+	.post_list_genre {
+		font-size: 10px;
+	}
+	.post_list_image {
+		padding: 0 5px !important;
+	}
+	.post_list_image > img {
+		max-height: 90px;
+	}
 }
 
 @media screen and (max-width:500px) {
@@ -296,7 +347,11 @@
 	}
 
 	.popular_users {
-		width: 97% !important;
+		width: 100% !important;
+	}
+	.user_contents {
+		width: 100%;
+		margin: 5px 0 !important;
 	}
 	.user_content_image > img {
 		width: 65%;
@@ -349,5 +404,23 @@
 	}
 	.comment_image {
 		padding: 0 5px !important;
+	}
+
+	.post_list_contents {
+		width: 97% !important;
+		height: 100px;
+		margin: 3px auto;
+	}
+	.post_list_title {
+		font-size: 16px;
+		margin: 0;
+	}
+	.post_list_image {
+		width: 30% !important;
+	}
+	.post_list_image > img {
+		width: 100%;
+		max-height: 90px;
+		padding: 0 15px;
 	}
 }

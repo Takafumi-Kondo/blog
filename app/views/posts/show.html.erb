@@ -33,7 +33,8 @@
         <%= @post.favorites.count %>
       <% end %>
     <!-- コメント欄 -->
-      <%= render 'posts/comments', post: @post, comment: @comment %>
+      <%= render 'posts/comments', post: @post, comment_counts: @comment_counts,
+                                   post_comments: @post_comments, comment: @comment %>
     </section>
     <!-- サイドバー -->
     <aside class="col-xs-3 text-center post_sidebar">
