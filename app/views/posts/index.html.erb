@@ -5,28 +5,26 @@
   <!-- 検索フォーム -->
   <% if @posts.count == 0 %>
   <% else %>
-    <div class="row">
-      <div class="post_list">
-        <div class="row row-eq-height">
-          <% @posts.each do |post| %>
-            <div class="col-xs-4 new_contents">
-              <div class="row">
-                <div class="col-xs-5 post_list_image">
-                  <%= attachment_image_tag post, :post_headerimage, format: 'jpeg', fallback: '/images/no_image.jpg', class: 'post_headerimage' %>
-                </div>
-                <%= link_to post_path(post.id), :style=> 'text-decoration: none;' do %>
-                  <h4 style="color: black;"><%= post.title.truncate(30) %></h4>
-                <% end %>
-                <p><%= post.genre.genre_name %></p>
-                <%= link_to user_path(post.user.id), :style=> 'text-decoration: none;' do %>
-                  <div class="text-right" style="color: black;"><%= post.user.name %></div>
-                <% end %>
-                <p class="posted_date text-right"><%= post.created_at.strftime("%Y-%m-%d") %></p>
-              </div>
+    <div class="row row-eq-height post_list">
+      <% @posts.each do |post| %>
+        <div class="col-xs-4 post_list_contents">
+          <div class="row">
+            <div class="col-xs-5 col-sm-6 post_list_image">
+              <%= attachment_image_tag post, :post_headerimage, format: 'jpeg', fallback: '/images/no_image.jpg', class: 'post_headerimage' %>
             </div>
-          <% end %>
+            <%= link_to post_path(post.id), :style=> 'text-decoration: none;' do %>
+              <h4 class="post_list_title" style="color: black;"><%= post.title.truncate(20) %></h4>
+            <% end %>
+            <p class="post_list_genre"><%= post.genre.genre_name %></p>
+            <div class="post_lists">
+              <%= link_to user_path(post.user.id), :style=> 'text-decoration: none;' do %>
+                <div class="text-right post_list_username" style="color: black;"><%= post.user.name %></div>
+              <% end %>
+              <p class="post_list_date text-right"><%= post.created_at.strftime("%Y-%m-%d") %></p>
+            </div>
+          </div>
         </div>
-      </div>
+      <% end %>
     </div>
     <%= paginate @posts %>
   <% end %>

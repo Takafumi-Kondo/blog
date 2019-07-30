@@ -1,23 +1,23 @@
 <div class="container">
-  <div class="row">
-  <section>
-    <h3><%= @user.name %>さんのフォロワー</h3>
-      <table class="table">
+  <section class="row">
+    <h3 class="follower_title"><%= @user.name %>さんのフォロワー</h3>
+      <table class="table follower_lists">
         <% @users.each do |user| %>
           <tr>
-            <td>
-              <%= attachment_image_tag user, :profile_image, format: 'jpeg', fallback: '/images/no_image.jpg', class: 'profile-img' %>
+            <td class="follower_user_image">
+              <%= attachment_image_tag user, :profile_image, format: 'jpeg', fallback: '/images/no_image.jpg' %>
             </td>
-            <td>
+            <td class="follower_user_name">
               <%= link_to user_path(user.id), :style=> 'text-decoration: none;' do %>
-                <%= user.name %>
+                <p style="color: black;"><%= user.name %></p>
               <% end %>
             </td>
-            <td><%= user.introduction %></td>
+            <td class="follower_user_introduction">
+              <%= user.introduction %>
+            </td>
           </tr>
         <% end %>
       </table>
     <%= paginate @users %>
   </section>
-  </div>
 </div>

@@ -23,6 +23,8 @@ class PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     impressionist(@post, nil, :unique => [:session_hash])
+    @comment_counts = Comment.where(post_id: @post)
+    @post_comments = Comment.page(params[:page]).where(post_id: @post).per(10)
     @comment = Comment.new
     @user = User.find_by(id: @post.user)
     @page_views = @post.impressions_count
@@ -34,9 +36,9 @@ class PostsController < ApplicationController
 
   def index
     @posts = if params[:search]
-      Post.page(params[:page]).per(20).where('title LIKE ? OR body LIKE ?', "%#{params[:search]}%", "%#{params[:search]}%").reverse_order
+      Post.page(params[:page]).per(21).where('title LIKE ? OR body LIKE ?', "%#{params[:search]}%", "%#{params[:search]}%").reverse_order
     else
-      Post.page(params[:page]).per(20).reverse_order
+      Post.page(params[:page]).per(21).reverse_order
     end
   end
 
