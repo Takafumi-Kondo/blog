@@ -31,10 +31,17 @@ class EmotionsController < ApplicationController
   end
 
   def destroy
-    emotion = Emotion.find(params[:id])
-    emotion.destroy
-    flash[:notice] = '削除しました。'
-    redirect_to emotions_path
+    @emotion = Emotion.find(params[:id])
+    posts = Post.where(emotion_id: @emotion)
+    if posts.blank?
+      @emotion.destroy
+      flash[:notice] = '削除しました。'
+      redirect_to emotions_path
+    else
+      @emotions = Emotion.page(params[:page]).per(10).reverse_order
+      flash[:notice] = 'この気分で投稿されている記事があります。'
+      render :index
+    end
   end
 
 

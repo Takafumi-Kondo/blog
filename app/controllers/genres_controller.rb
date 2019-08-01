@@ -31,10 +31,17 @@ class GenresController < ApplicationController
   end
 
   def destroy
-    genre = Genre.find(params[:id])
-    genre.destroy
-    flash[:notice] = '削除しました。'
-    redirect_to genres_path
+    @genre = Genre.find(params[:id])
+    posts = Post.where(genre_id: @genre)
+    if posts.blank?
+      @genre.destroy
+      flash[:notice] = '削除しました。'
+      redirect_to genres_path
+    else
+      @genres = Genre.page(params[:page]).per(10).reverse_order
+      flash[:notice] = 'このジャンルで投稿されている記事があります。'
+      render :index
+    end
   end
 
 
